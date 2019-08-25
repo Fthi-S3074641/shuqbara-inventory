@@ -7,3 +7,4 @@ export const addItem = ({commit}, newitem) => {
 export const removeItem = ({commit}, index) => {
   commit(types.REMOVE_ITEM, index)
 }
+

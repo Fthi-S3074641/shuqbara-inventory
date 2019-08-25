@@ -16,40 +16,71 @@
       </v-card-title>
 
     <v-list three-line>
-      <template v-for="(item, index) in filteredArticles">
-
-        <v-divider
+          <v-list-group
+        v-for="(item, index) in filteredArticles"
+        :key="item.icode"
+        no-action
+      >
+                      <v-divider
           :key="index"
           :inset="true"
         ></v-divider>
+      <template v-slot:activator>
 
         <v-list-item
           :key="item.icode"
         >
-          <v-list-item-avatar color="primary" size="36">
-            <span class="white--text title font-weight-light">{{item.iquantity}}</span>
-          </v-list-item-avatar>
+              <v-list-item-avatar color="primary" size="36">
+                <span class="white--text title font-weight-light">{{item.iquantity}}</span>
+              </v-list-item-avatar>
 
-          <v-list-item-content>
-            <v-list-item-title class="title font-weight-light" v-html="item.icode"></v-list-item-title>
-            <v-list-item-subtitle v-html="item.idetail"></v-list-item-subtitle>
-          </v-list-item-content>
+              <v-list-item-content>
+                <v-list-item-title class="title font-weight-light" v-html="item.icode"></v-list-item-title>
+                <v-list-item-subtitle v-html="item.idetail"></v-list-item-subtitle>
+              </v-list-item-content>
 
-          <v-list-item-action>
-            <v-list-item-action-text v-text="`Created at: ${item.iregister}`"></v-list-item-action-text>
-            <v-row justify="space-around">
-          <v-btn icon>
-            <v-icon>mdi-pencil</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>mdi-delete</v-icon>
-          </v-btn>
-          </v-row>
-        </v-list-item-action>
-
+              <v-list-item-action>
+                <v-list-item-action-text v-text="`Created at: ${item.iregister}`"></v-list-item-action-text>
+                <v-row justify="space-around">
+                 <v-chip
+                 v-if="!sold"
+                    class="ma-2"
+                    color="red"
+                    text-color="white"
+                    @click="sellOne(item)"
+                  >
+                   Sell 1
+                  </v-chip>
+              <v-chip
+                 v-if="sold"
+                    class="ma-2"
+                    color="red"
+                    text-color="white"
+                    @click="sellOne(item)"
+                  >
+                   Sell again
+                  </v-chip>
+                  <v-btn icon>
+                    <v-icon>mdi-pencil</v-icon>
+                  </v-btn>
+                  <v-btn icon>
+                    <v-icon>mdi-delete</v-icon>
+                  </v-btn>
+                </v-row>
+            </v-list-item-action>
 
         </v-list-item>
       </template>
+
+              <v-list-item
+          v-for="subItem in item.iactivity"
+          :key="subItem.title"
+        >
+          <v-list-item-content>
+            <v-list-item-subtitle v-text="`${subItem.title} at:  ${subItem.idate}`"></v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        </v-list-group>
     </v-list>
   </v-card>
   </v-col>
@@ -60,13 +91,18 @@
   export default {
     data() {
       return {
-        searchString: null
+        searchString: null,
+        sold: false
       }
     },
     methods: {
       getIndex(iicode) {
         return this.getAll.map(function(e) {
           return e.icode;}).indexOf(iicode);
+      },
+      sellOne() {
+        this.sold = true
+        
       }
     },
     computed: {

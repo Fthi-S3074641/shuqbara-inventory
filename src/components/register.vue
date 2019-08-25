@@ -24,21 +24,7 @@
           ></v-text-field>
         </v-col>
 
-        <v-col cols="12" sm="6">
-          <v-text-field
-            label="Write down brand name"
-            placeholder="Brand of the new item"
-            outlined
-            clearable
-            required
-            ref="ibrand"
-            v-model="ibrand"
-            :rules="[() => !!ibrand || 'This field is required']"
-          ></v-text-field>
-        </v-col>
-
-
-        <v-col cols="12" sm="6" >
+                <v-col cols="12" sm="6" >
           <v-text-field
             label="Number of items to register"
             placeholder="Quantity"
@@ -49,6 +35,19 @@
             v-model="iquantity"
             type="number"
             :rules="[() => !!iquantity || 'This field is required']"
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="12" sm="6">
+          <v-text-field
+            label="Write down brand name"
+            placeholder="Brand of the new item"
+            outlined
+            clearable
+            required
+            ref="ibrand"
+            v-model="ibrand"
+            :rules="[() => !!ibrand || 'This field is required']"
           ></v-text-field>
         </v-col>
 
@@ -159,7 +158,11 @@ export default {
             itype: this.itype,
             iregister: this.format(new Date()),
             imodify: this.format(new Date()),
-            idetail: `<span class='text--primary'>${this.ibrand}</span> &mdash; ${this.itype}.`
+            idetail: `<span class='text--primary'>${this.ibrand}</span> &mdash; ${this.itype}.`,
+            iactivity: [{
+              title: "Created",
+              idate: this.format(new Date())
+            }]
           }
           this.$store.dispatch('addItem', inew).then(()=> {
                 this.$router.push('/read')
@@ -169,5 +172,6 @@ export default {
         this.$router.go(-1)
       }
     },
+
   }
 </script>

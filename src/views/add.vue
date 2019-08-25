@@ -70,7 +70,7 @@ export default {
             items: [
                 { text: 'Register', icon: 'mdi-folder', link: '/register' },
                 { text: 'Read', icon: 'mdi-clock', link: '/read' },
-                { text: 'Report', icon: 'mdi-update', link: '/report' },
+                { text: 'Report', icon: 'mdi-update', link: '/report' }
             ]
         }
     },
