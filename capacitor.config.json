@@ -1,0 +1,7 @@
+{
+  "appId": "com.rcube.app",
+  "appName": "rcube",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist"
+}
