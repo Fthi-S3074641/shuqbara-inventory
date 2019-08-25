@@ -24,7 +24,7 @@
       <!-- End of app toolbar -->
 
       <!-- Start of mobile side menu -->
-      <v-navigation-drawer app v-model="drawer" right>
+      <v-navigation-drawer app v-model="drawer" left>
         <!-- Menu title -->
         <v-app-bar flat>
           <v-list>
