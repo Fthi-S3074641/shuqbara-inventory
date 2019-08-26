@@ -1,5 +1,6 @@
 <template>
-  <v-row justify="center">
+<v-app>
+      <v-row justify="center">
     <v-col cols="12" sm="10" md="8" lg="6">
       <v-card ref="form">
       <v-card-title>
@@ -95,6 +96,7 @@
       </v-card>
     </v-col>
   </v-row>
+</v-app>
 </template>
 
 <script>
@@ -111,7 +113,6 @@ export default {
         formHasErrors: false
       }
     },
-
     computed: {
       form () {
         return {

@@ -41,7 +41,7 @@
             <v-btn
               color="blue lighten-2"
               large
-              @click="goThere('/read')"
+              @click="goThere('/register')"
             >
               Continue
             </v-btn>

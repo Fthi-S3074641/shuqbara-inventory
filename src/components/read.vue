@@ -20,8 +20,10 @@
         v-for="(item, index) in filteredArticles"
         :key="item.icode"
         no-action
+        :accordion="true"
+        :focusable="true"
       >
-                      <v-divider
+        <v-divider
           :key="index"
           :inset="true"
         ></v-divider>
@@ -39,36 +41,6 @@
                 <v-list-item-subtitle v-html="item.idetail"></v-list-item-subtitle>
               </v-list-item-content>
 
-              <v-list-item-action>
-                <v-list-item-action-text v-text="`Created at: ${item.iregister}`"></v-list-item-action-text>
-                <v-row justify="space-around">
-                 <v-chip
-                 v-if="!sold"
-                    class="ma-2"
-                    color="red"
-                    text-color="white"
-                    @click="sellOne(item)"
-                  >
-                   Sell 1
-                  </v-chip>
-              <v-chip
-                 v-if="sold"
-                    class="ma-2"
-                    color="red"
-                    text-color="white"
-                    @click="sellOne(item)"
-                  >
-                   Sell again
-                  </v-chip>
-                  <v-btn icon>
-                    <v-icon>mdi-pencil</v-icon>
-                  </v-btn>
-                  <v-btn icon>
-                    <v-icon>mdi-delete</v-icon>
-                  </v-btn>
-                </v-row>
-            </v-list-item-action>
-
         </v-list-item>
       </template>
 
@@ -79,6 +51,17 @@
           <v-list-item-content>
             <v-list-item-subtitle v-text="`${subItem.title} at:  ${subItem.idate}`"></v-list-item-subtitle>
           </v-list-item-content>
+
+
+                    <v-list-item-action>
+                <v-list-item-action-text v-text="`Created at: ${item.iregister}`"></v-list-item-action-text>
+                <v-row justify="space-around">
+                  <Sell />
+                  <Edit />
+                  <Delete />
+
+                </v-row>
+            </v-list-item-action>
         </v-list-item>
         </v-list-group>
     </v-list>
@@ -88,7 +71,11 @@
 </template>
 
 <script>
-  export default {
+import Delete from './dialog/delete'
+import Sell from './dialog/sell'
+import Edit from './dialog/edit'
+
+export default {
     data() {
       return {
         searchString: null,
@@ -99,10 +86,6 @@
       getIndex(iicode) {
         return this.getAll.map(function(e) {
           return e.icode;}).indexOf(iicode);
-      },
-      sellOne() {
-        this.sold = true
-        
       }
     },
     computed: {
@@ -132,6 +115,11 @@
             // Return an array with the filtered data.
             return articles_array
         }
+    },
+    components: {
+      Delete,
+      Sell,
+      Edit
     }
   }
 </script>
