@@ -58,7 +58,7 @@
                 <v-row justify="space-around">
                   <Sell />
                   <Edit />
-                  <Delete />
+                  <Delete :dcode="item.icode"/>
 
                 </v-row>
             </v-list-item-action>
