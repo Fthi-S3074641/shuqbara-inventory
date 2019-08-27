@@ -17,11 +17,11 @@
           class="warning headline grey lighten-2"
           primary-title
         >
-          Warning
+          Warning deleting "{{dcode}}"
         </v-card-title>
 
         <v-card-text>
-        You are about to delete this item from the database. You will no longer have access to it. Are you sure you want to delete this item???
+        You are about to delete an item with the following code <span class="font-weight-bold">{{dcode}}</span>from the database. You will no longer have access to it. Are you sure you want to delete this item???
                 </v-card-text>
 
         <v-divider></v-divider>
@@ -39,7 +39,7 @@
           <v-btn
             color="warning"
             text
-            @click="dialog = false"
+            @click="yesRemove"
           >
             Yes Remove
           </v-btn>
@@ -51,6 +51,7 @@
 
 <script>
   export default {
+  props: ['dcode'],
     data () {
       return {
         dialog: false,
@@ -59,8 +60,22 @@
     methods: {
       cancel() {
         this.dialog = false
-        
+      },
+      yesRemove() {
+      this.$store.dispatch('removeItem', this.getIndex).then(()=>{
+                this.dialog = false
+      });
+
       }
+    },
+    computed: {
+    getIndex(){
+    return this.getAll.map(function(e) {
+          return e.icode;}).indexOf(this.dcode);
+    },
+    getAll() {
+      return this.$store.state.allItems
+    }
     }
   }
 </script>
