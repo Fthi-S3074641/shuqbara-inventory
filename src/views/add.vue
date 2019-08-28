@@ -9,7 +9,7 @@
           class="hidden-md-and-up"
         ></v-app-bar-nav-icon>
         <v-toolbar-title class="headline text-uppercase">
-          <span @click="$router.push('/')"> Rcube </span>
+          <span @click="$router.push('/')"> Vision </span>
           <span class="font-weight-light" @click="$router.push('/read')"> Inventory manager</span>
           </v-toolbar-title>
         <v-spacer></v-spacer>
@@ -28,7 +28,7 @@
         <!-- Menu title -->
         <v-app-bar flat>
           <v-list>
-            <v-subheader class="title"> Rcube Manager </v-subheader>
+            <v-subheader class="title"> Vision Manager </v-subheader>
           </v-list>
         </v-app-bar>
         <v-divider></v-divider>

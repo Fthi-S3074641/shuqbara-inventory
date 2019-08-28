@@ -21,12 +21,12 @@
 
       <v-flex mb-4>
               <h1 class="headline text-uppercase mb-3">
-          <span> Rcube </span>
+          <span> Vision </span>
           <span class="font-weight-light"> Premium</span>
           </h1>
 
         <p class="subheading font-weight-regular">
-          <br> Download a premium version from
+          <br> Download premium from
           <a href="https://shuqbara.com" target="_blank">PickApp Technology</a>
         </p>
       </v-flex>

@@ -158,9 +158,7 @@ export default {
             itype: this.itype,
             istate: "Created",
             iwhen: this.format(new Date()),
-            iactivity: [
-              {title: "Sold", idate: this.format(new Date())}
-            ]
+            iactivity: [ ]
           }
           this.$store.dispatch('addItem', inew).then(()=> {
                 this.$router.push('/read')

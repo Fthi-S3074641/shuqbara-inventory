@@ -21,7 +21,7 @@
 
       <v-flex mb-4>
               <h1 class="headline text-uppercase mb-3">
-          <span> Rcube </span>
+          <span> Vision </span>
           <span class="font-weight-light"> Inventory manager</span>
           </h1>
 

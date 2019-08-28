@@ -57,6 +57,7 @@
                 <v-list-item-action-text v-text="`${item.istate} at: ${item.iwhen}`"></v-list-item-action-text>
                 <v-row justify="space-around">
                   <Sell :scode="item.icode"/>
+                  <Restock :rcode="item.icode"/>
                   <Edit :ecode="item.icode"/>
                   <Delete :dcode="item.icode"/>
                 </v-row>
@@ -79,6 +80,7 @@
 import Delete from './dialog/delete'
 import Sell from './dialog/sell'
 import Edit from './dialog/edit'
+import Restock from './dialog/restock'
 
 export default {
     data() {
@@ -124,7 +126,8 @@ export default {
     components: {
       Delete,
       Sell,
-      Edit
+      Edit,
+      Restock
     }
   }
 </script>
