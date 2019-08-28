@@ -13,10 +13,10 @@
 
         <v-col cols="12" sm="6">
           <v-text-field
-            label="Write down a unique code"
+            label="Code"
             placeholder="ID of the new item"
             clearable
-            prepend-icon="mdi-hanger"
+            outlined
             autofocus
             required
             ref="icode"
@@ -25,12 +25,12 @@
           ></v-text-field>
         </v-col>
 
-                <v-col cols="12" sm="6" >
+          <v-col cols="12" sm="6" >
           <v-text-field
-            label="Number of items to register"
-            placeholder="Quantity"
-            prepend-icon="mdi-counter"
+            label="Quantity"
+            placeholder="Number of items to register"
             clearable
+            outlined
             required
             ref="iquantity"
             v-model="iquantity"
@@ -41,7 +41,7 @@
 
         <v-col cols="12" sm="6">
           <v-text-field
-            label="Write down brand name"
+            label="Brand"
             placeholder="Brand of the new item"
             outlined
             clearable
@@ -54,7 +54,7 @@
 
         <v-col cols="12" sm="6" >
           <v-text-field
-            label="Write down type of the new item"
+            label="Type"
             placeholder="Type or Group of the new item"
             outlined
             clearable
@@ -75,7 +75,6 @@
             <div class="flex-grow-1"></div>
             <v-slide-x-reverse-transition>
                 <v-tooltip
-                v-if="formHasErrors"
                 left
                 >
               <template v-slot:activator="{ on }">
@@ -157,13 +156,11 @@ export default {
             iquantity: this.iquantity,
             ibrand: this.ibrand,
             itype: this.itype,
-            iregister: this.format(new Date()),
-            imodify: this.format(new Date()),
-            idetail: `<span class='text--primary'>${this.ibrand}</span> &mdash; ${this.itype}.`,
-            iactivity: [{
-              title: "Created",
-              idate: this.format(new Date())
-            }]
+            istate: "Created",
+            iwhen: this.format(new Date()),
+            iactivity: [
+              {title: "Sold", idate: this.format(new Date())}
+            ]
           }
           this.$store.dispatch('addItem', inew).then(()=> {
                 this.$router.push('/read')

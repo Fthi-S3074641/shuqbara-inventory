@@ -30,14 +30,21 @@
         <v-card-title
           class="primary headline grey lighten-2"
           primary-title>
-          Sales information
+          Sell item "{{scode}}"
         </v-card-title>
 
         <v-card-text>
-        1 item will be sold from your stock. Therefore the quantity of available items will decrease by 1. Confirm if 1 item is sold?
+        An item of code "<span class="font-weight-bold">{{scode}}</span>" will be sold from your stock. Therefore the quantity of available items will decrease by {{amount}}. Confirm if {{amount}} item is sold?
                 </v-card-text>
-
+            <v-text-field
+            label="Quantity"
+            clearable
+            outlined
+            v-model="amount"
+            type="number"
+          ></v-text-field>
         <v-divider></v-divider>
+          <p color="red" class="font-weight-bold" v-if="!quantityEnough">Must enter amount less than available in store</p>
 
         <v-card-actions>
           <div class="flex-grow-1"></div>
@@ -50,6 +57,7 @@
           </v-btn>
           <v-spacer />
           <v-btn
+            :disabled="!quantityEnough"
             color="primary"
             text
             @click="sellOne()"
@@ -63,23 +71,55 @@
 </template>
 
 <script>
-  export default {
+import format from "date-fns/format"
+export default {
+    props: ['scode'],
     data () {
       return {
         dialog: false,
-        sold: false
+        sold: false,
+        amount: 1,
+        soldItem: {}
       }
     },
     methods: {
+      format(val) {
+        return format(val, "mm-dd-yyyy")
+      },
       sellOne() {
-          this.dialog = false
-        this.sold = true
+        const indx = this.getIndex
+        const oldq = this.soldItem.iquantity
+        this.$store.dispatch('removeItem', indx).then(()=> {
+          this.soldItem.iquantity = oldq - this.amount
+          this.soldItem.iactivity.push({title: `Sold ${this.amount}`, idate: this.format(new Date())})
+          this.$store.dispatch('addItem', this.soldItem).then(()=> {
+            this.dialog = false
+            this.sold = true
+          });
+        });
+
         
       },
       cancel() {
           this.dialog = false
           this.sold = false
       }
+    },
+    computed: {
+      getIndex(){
+      return this.getAll.map(function(e) {
+            return e.icode;}).indexOf(this.scode);
+      },
+      getAll() {
+        return this.$store.state.allItems
+      },
+      quantityEnough() {
+        return this.amount <= this.soldItem.iquantity
+      }
+    },
+    created() {
+      this.soldItem = this.getAll[this.getIndex]
+
     }
   }
 </script>

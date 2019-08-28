@@ -38,33 +38,38 @@
 
               <v-list-item-content>
                 <v-list-item-title class="title font-weight-light" v-html="item.icode"></v-list-item-title>
-                <v-list-item-subtitle v-html="item.idetail"></v-list-item-subtitle>
+                <v-list-item-subtitle v-html="`<span class='text--primary'>${item.ibrand}</span> &mdash; ${item.itype}.`"></v-list-item-subtitle>
               </v-list-item-content>
 
         </v-list-item>
       </template>
 
-              <v-list-item
-          v-for="subItem in item.iactivity"
-          :key="subItem.title"
-        >
+              <v-list-item>
           <v-list-item-content>
-            <v-list-item-subtitle v-text="`${subItem.title} at:  ${subItem.idate}`"></v-list-item-subtitle>
+            <v-list-item-subtitle 
+              v-for="subItem in item.iactivity"
+              :key="subItem.title"
+              v-text="`${subItem.title} at:  ${subItem.idate}`"></v-list-item-subtitle>
           </v-list-item-content>
 
 
-                    <v-list-item-action>
-                <v-list-item-action-text v-text="`Created at: ${item.iregister}`"></v-list-item-action-text>
+              <v-list-item-action>
+                <v-list-item-action-text v-text="`${item.istate} at: ${item.iwhen}`"></v-list-item-action-text>
                 <v-row justify="space-around">
-                  <Sell />
-                  <Edit />
+                  <Sell :scode="item.icode"/>
+                  <Edit :ecode="item.icode"/>
                   <Delete :dcode="item.icode"/>
-
                 </v-row>
             </v-list-item-action>
         </v-list-item>
         </v-list-group>
     </v-list>
+    <v-card-actions>
+    <v-spacer />
+      <v-btn  fab dark color="primary" @click="$router.push('/register')">
+      <v-icon > mdi-plus</v-icon>
+      </v-btn>
+    </v-card-actions>
   </v-card>
   </v-col>
   </v-row>
