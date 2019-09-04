@@ -7,6 +7,14 @@ export const mutations = {
 
   [types.REMOVE_ITEM] (state, payload) {
     state.allItems.splice(payload,1)
+  },
+
+  [types.FROM_FILE] (state, payload) {
+    state.allItems.push(...payload)
+  },
+
+  [types.SET_USER] (state, payload) {
+    state.user = payload
   }
 
 }

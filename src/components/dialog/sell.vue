@@ -36,10 +36,10 @@
         <v-card-text>
         <v-container>
             <v-row justify="center" color="primary">
-            <v-col cols="12" sm="6">
+            <v-col cols="12" sm="8">
 
        <p> An item of code "<span class="font-weight-bold">{{scode}}</span>" will be sold from your stock. Therefore the quantity of available items will decrease by {{amount}}.
-        Confirm if {{amount}} item is sold?</p>
+        <br> Confirm if {{amount}} item will be sold?</p>
               
             <v-text-field
             label="Quantity"
@@ -128,7 +128,10 @@ export default {
     },
     created() {
       this.soldItem = this.getAll[this.getIndex]
-
-    }
+    },
+    beforeDestroy() {
+       const shuqbara = JSON.stringify(this.$store.state.allItems)
+        window.localStorage.setItem('shuqbara', shuqbara)
+    },
   }
 </script>

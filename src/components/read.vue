@@ -15,7 +15,10 @@
           ></v-text-field>
       </v-card-title>
 
+<v-card-text>
+        <p justify="center" align="center"> Available Items: Order Decreasing <v-icon @click="descendingList" color="primary"> mdi-arrow-down</v-icon> Order Increasing  <v-icon @click="increasingList" color="primary"> mdi-arrow-up</v-icon></p>
     <v-list three-line>
+
           <v-list-group
         v-for="(item, index) in filteredArticles"
         :key="item.icode"
@@ -65,6 +68,8 @@
         </v-list-item>
         </v-list-group>
     </v-list>
+
+    </v-card-text>
     <v-card-actions>
     <v-spacer />
       <v-btn  fab dark color="primary" @click="$router.push('/register')">
@@ -86,14 +91,21 @@ export default {
     data() {
       return {
         searchString: null,
-        sold: false
+        sold: false,
+        shuqbara: []
       }
     },
     methods: {
       getIndex(iicode) {
         return this.getAll.map(function(e) {
           return e.icode;}).indexOf(iicode);
-      }
+      },
+      increasingList() {
+          this.shuqbara.sort((a, b) => a.iquantity - b.iquantity);
+        },
+      descendingList() {
+          this.shuqbara.sort((a, b) => b.iquantity - a.iquantity);
+        }
     },
     computed: {
       getCodeList(){
@@ -105,7 +117,7 @@ export default {
       },        
       
       filteredArticles: function () {
-            var articles_array = this.getAll,
+            var articles_array = this.shuqbara,
                 searchString = this.searchString;
 
             if(!searchString){
@@ -128,6 +140,13 @@ export default {
       Sell,
       Edit,
       Restock
-    }
+    },
+    beforeDestroy() {
+       const shuqbara = JSON.stringify(this.$store.state.allItems)
+        window.localStorage.setItem('shuqbara', shuqbara)
+    },
+    created() {
+      this.shuqbara = this.$store.state.allItems
+    },
   }
 </script>

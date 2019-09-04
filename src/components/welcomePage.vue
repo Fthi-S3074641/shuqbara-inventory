@@ -64,6 +64,10 @@ export default {
     goThere(distnation){
       this.$router.push(distnation)
     }
-  }
+  },
+  beforeDestroy() {
+       const shuqbara = JSON.stringify(this.$store.state.allItems)
+        window.localStorage.setItem('shuqbara', shuqbara)
+    },
 };
 </script>

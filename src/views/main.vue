@@ -9,8 +9,8 @@
           class="hidden-md-and-up"
         ></v-app-bar-nav-icon>
         <v-toolbar-title class="headline text-uppercase">
-          <span @click="$router.push('/')"> Vision </span>
-          <span class="font-weight-light" @click="$router.push('/read')"> Inventory manager</span>
+          <span @click="$router.push('/')"> Shuqbara </span>
+          <span class="font-weight-light" @click="$router.push('/read')"> Inventory</span>
           </v-toolbar-title>
         <v-spacer></v-spacer>
 
@@ -28,7 +28,7 @@
         <!-- Menu title -->
         <v-app-bar flat>
           <v-list>
-            <v-subheader class="title"> Vision Manager </v-subheader>
+            <v-subheader class="title"> Shuqbara Manager </v-subheader>
           </v-list>
         </v-app-bar>
         <v-divider></v-divider>
@@ -68,9 +68,11 @@ export default {
             drawer: false,
             item: 1,
             items: [
-                { text: 'Register', icon: 'mdi-folder', link: '/register' },
-                { text: 'Read', icon: 'mdi-clock', link: '/read' },
-                { text: 'Report', icon: 'mdi-update', link: '/report' }
+                { text: 'Register', icon: 'mdi-folder-outline', link: '/register' },
+                { text: 'Read', icon: 'mdi-folder-edit-outline', link: '/read' },
+                { text: 'Report', icon: 'mdi-collapse-all', link: '/report' },
+                { text: 'Feedback', icon: 'mdi-comment-outline', link: '/feedback' },
+                { text: 'Made In', icon: 'mdi-heart-outline', link: '/developer' }
             ]
         }
     },

@@ -7,7 +7,8 @@ Vue.use(Vuex)
 
 const state = {
     allItems: [],
-    currentItem: {}
+    currentItem: {},
+    user: {}
 }
 
 export default new Vuex.Store({

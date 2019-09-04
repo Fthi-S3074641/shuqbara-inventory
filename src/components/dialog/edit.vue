@@ -24,7 +24,7 @@
         <v-container>
         <v-row justify="center" color="primary" class="form row">
 
-        <v-col cols="12" sm="6">
+        <v-col cols="12" sm="8">
           <v-text-field
             label="Code"
             clearable
@@ -125,6 +125,10 @@ export default {
       this.newicode = this.ecode
       this.newibrand = this.updateItem.ibrand
       this.newitype = this.updateItem.itype
-    }
+    },
+    beforeDestroy() {
+       const shuqbara = JSON.stringify(this.$store.state.allItems)
+        window.localStorage.setItem('shuqbara', shuqbara)
+    },
   }
 </script>

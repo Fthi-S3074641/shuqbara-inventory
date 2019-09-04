@@ -10,8 +10,15 @@
 
 export default {
   name: 'App',
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+
+    }
+  },
+  mounted() {
+    const shuqbara = JSON.parse(window.localStorage.getItem('shuqbara'))
+    this.$store.dispatch('fromFile', shuqbara)
+  }
+
 };
 </script>

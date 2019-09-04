@@ -22,7 +22,7 @@
 
         <v-card-text>
         You are about to delete an item with the following code "<span class="font-weight-bold">{{dcode}}</span>" from the database. 
-        You will no longer have access to it. Are you sure you want to delete this item???
+        You will no longer have access to it.<br> Are you sure you want to delete this item???
                 </v-card-text>
 
         <v-divider></v-divider>
@@ -70,13 +70,17 @@
       }
     },
     computed: {
-    getIndex(){
-    return this.getAll.map(function(e) {
-          return e.icode;}).indexOf(this.dcode);
+        getIndex(){
+        return this.getAll.map(function(e) {
+              return e.icode;}).indexOf(this.dcode);
+        },
+        getAll() {
+          return this.$store.state.allItems
+        }
     },
-    getAll() {
-      return this.$store.state.allItems
-    }
-    }
+    beforeDestroy() {
+       const shuqbara = JSON.stringify(this.$store.state.allItems)
+        window.localStorage.setItem('shuqbara', shuqbara)
+    },
   }
 </script>

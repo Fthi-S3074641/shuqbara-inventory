@@ -168,6 +168,10 @@ export default {
         this.$router.go(-1)
       }
     },
+    beforeDestroy() {
+       const shuqbara = JSON.stringify(this.$store.state.allItems)
+        window.localStorage.setItem('shuqbara', shuqbara)
+    },
 
   }
 </script>

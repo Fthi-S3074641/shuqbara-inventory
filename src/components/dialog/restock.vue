@@ -22,7 +22,7 @@
 
         <v-container>
             <v-row justify="center" color="primary">
-            <v-col cols="12" sm="6">
+            <v-col cols="12" sm="8">
                 <p>  An item of code 
                 "<span class="font-weight-bold">{{rcode}}</span>" 
                 will be added to your store. Therefore the quantity of available items will increased by {{amount}}. 
@@ -116,6 +116,10 @@ export default {
     created() {
       this.soldItem = this.getAll[this.getIndex]
 
-    }
+    },
+    beforeDestroy() {
+       const shuqbara = JSON.stringify(this.$store.state.allItems)
+        window.localStorage.setItem('shuqbara', shuqbara)
+    },
   }
 </script>
