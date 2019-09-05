@@ -1,72 +1,28 @@
 <template>
-  <v-container>
-
-    <v-layout
-      text-center
-      wrap
-      justify-center
-      align-center
-    >
-    <v-flex xs12 sm10 md8>
-      <v-card flat style="margin: 10px;">
-      <v-flex xs12>
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-          @click="$router.go('/')"
-        ></v-img>
-      </v-flex>
-
-      <v-flex mb-4>
-              <h1 class="headline text-uppercase mb-3">
-          <span> Vision </span>
-          <span class="font-weight-light"> Premium</span>
-          </h1>
-
-        <p class="subheading font-weight-regular">
-          <br> Download premium from
-          <a href="https://shuqbara.com" target="_blank">PickApp Technology</a>
-        </p>
-      </v-flex>
-
-      <v-flex
-        mb-5
-        xs12
-      >
-  <em>Or call us to get a Premium version </em>
-        <v-layout justify-center>
-       <h2 class="font-weight-light"> 0953166155</h2>
-
-        </v-layout>
-      </v-flex>
-    </v-card>
-    </v-flex>
-    </v-layout>
-  </v-container>
+  <v-card
+    class="mx-auto"
+    max-width="344"
+  >
+    <v-card-text>
+      <div>To support us</div>
+         <v-chip>
+      <v-icon left color="red">mdi-heart</v-icon>
+      Donate
+    </v-chip>
+      <p>Commercial Bank of Ethiopia (CBE)</p>
+      <div class="text--primary">
+        Account Number: 100000000<br>
+        Account Name: Fthi Arefayne
+      </div>
+    </v-card-text>
+    <v-card-actions>
+ <div>Contacts us (developers in Axum)</div>
+      <div class="text--primary">
+        Phone Number: 09 53 1661 55<br>
+        Email: fthialem@gmail.com <br>
+        Location: Teklish Dish (Axum, Tigray, Ethiopia) <br>
+        Address: East of Ezana park
+      </div>
+    </v-card-actions>
+  </v-card>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-        inumber: null
-    }
-  },
-  methods: {
-    goThere(distnation){
-      this.$router.push(distnation)
-    },
-    requestPremium() {
-        if(!this.inumber){
-            this.$router.push('/read')
-        }
-    }
-  },
-  beforeDestroy() {
-       const shuqbara = JSON.stringify(this.$store.state.allItems)
-        window.localStorage.setItem('shuqbara', shuqbara)
-    },
-};
-</script>
