@@ -14,15 +14,18 @@
         Account Number: 100000000<br>
         Account Name: Fthi Arefayne
       </div>
-    </v-card-text>
-    <v-card-actions>
- <div>Contacts us (developers in Axum)</div>
+       <p>Contacts us</p>
       <div class="text--primary">
         Phone Number: 09 53 1661 55<br>
-        Email: fthialem@gmail.com <br>
-        Location: Teklish Dish (Axum, Tigray, Ethiopia) <br>
-        Address: East of Ezana park
-      </div>
+        Email: fthialem@gmail.com
+        </div>
+    </v-card-text>
+    <v-card-actions>
+<p> Location & Address </p>
+<div class="text-primary">Teklish Dish (Axum, Tigray, Ethiopia)
+         East of Ezana park
+         </div>
+    
     </v-card-actions>
   </v-card>
 </template>
