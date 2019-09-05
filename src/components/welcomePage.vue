@@ -21,8 +21,8 @@
 
       <v-flex mb-4>
               <h1 class="headline text-uppercase mb-3">
-          <span> Vision </span>
-          <span class="font-weight-light"> Inventory manager</span>
+          <span> Shuqbara </span>
+          <span class="font-weight-light"> Inventory</span>
           </h1>
 
         <p class="subheading font-weight-regular">
