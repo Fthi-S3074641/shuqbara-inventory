@@ -21,7 +21,7 @@
 
       <v-flex mb-4>
               <h1 class="headline text-uppercase mb-3">
-          <span> Vision </span>
+          <span> Shuqbara </span>
           <span class="font-weight-light"> Premium</span>
           </h1>
 

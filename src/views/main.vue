@@ -1,9 +1,9 @@
 <template>
-  <v-app dense>
+  <v-app dense style="background: rgba(0,0,0,0);" class="transparent">
     <!-- Start of Navigation -->
-    <nav>
+    <nav style="background: rgba(0,0,0,0);" class="transparent">
       <!-- Start of app toolbar -->
-      <v-app-bar app flat dense>
+      <v-app-bar app flat dense style="background: rgba(0,0,0,0);" class="transparent">
         <v-app-bar-nav-icon
           @click.stop="drawer = !drawer"
           class="hidden-md-and-up"
@@ -24,7 +24,7 @@
       <!-- End of app toolbar -->
 
       <!-- Start of mobile side menu -->
-      <v-navigation-drawer app v-model="drawer" left>
+      <v-navigation-drawer app v-model="drawer" left class="transparent" style="background: rgba(0,0,0,0);">
         <!-- Menu title -->
         <v-app-bar flat>
           <v-list>
@@ -70,8 +70,8 @@ export default {
             items: [
                 { text: 'Register', icon: 'mdi-folder-outline', link: '/register' },
                 { text: 'Read', icon: 'mdi-folder-edit-outline', link: '/read' },
-                { text: 'Report', icon: 'mdi-collapse-all', link: '/report' },
-                { text: 'Feedback', icon: 'mdi-comment-outline', link: '/feedback' },
+                { text: 'Report', icon: 'mdi-collapse-all', link: '/login' },
+                { text: 'Feedback', icon: 'mdi-comment-outline', link: '/login' },
                 { text: 'Made In', icon: 'mdi-heart-outline', link: '/developer' }
             ]
         }

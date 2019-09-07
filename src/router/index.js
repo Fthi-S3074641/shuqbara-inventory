@@ -7,8 +7,8 @@ import main from './../views/main'
 import register from './../components/register'
 import read from './../components/read'
 import report from './../components/report'
-import feedback from './../components/feedback'
 import developer from './../components/developer'
+import login from './../components/login'
 
 Vue.use(Vrouter)
 
@@ -40,9 +40,9 @@ export default new Vrouter({
                     component: report
                 },
                 {
-                    path: '/feedback',
-                    name: 'feedback',
-                    component: feedback
+                    path: '/login',
+                    name: 'login',
+                    component: login
                 },
                 {
                     path: '/developer',

@@ -8,7 +8,12 @@ Vue.use(Vuex)
 const state = {
     allItems: [],
     currentItem: {},
-    user: {}
+    user: {},
+    title: {
+        mainTitle: 'Shuqbara',
+        subTitle: 'Inventory',
+        useTitle: true
+    }
 }
 
 export default new Vuex.Store({
