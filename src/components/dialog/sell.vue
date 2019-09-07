@@ -100,7 +100,7 @@ export default {
         const oldq = this.soldItem.iquantity
         this.$store.dispatch('removeItem', indx).then(()=> {
           this.soldItem.iquantity = oldq - this.amount
-          this.soldItem.iactivity.push({title: `Sold ${this.amount}`, idate: this.format(new Date())})
+          this.soldItem.iactivity.push({title: `-${this.amount}`, idate: this.format(new Date())})
           this.$store.dispatch('addItem', this.soldItem).then(()=> {
             this.dialog = false
             this.sold = true

@@ -24,22 +24,18 @@
           <span> Shuqbara </span>
           <span class="font-weight-light"> Premium</span>
           </h1>
-
-        <p class="subheading font-weight-regular">
-          <br> Download premium from
-          <a href="https://shuqbara.com" target="_blank">PickApp Technology</a>
-        </p>
       </v-flex>
 
-      <v-flex
-        mb-5
-        xs12
-      >
-  <em>Or call us to get a Premium version </em>
+      <v-flex mb-5 xs12 >
         <v-layout justify-center>
-       <h2 class="font-weight-light"> 0953166155</h2>
-
+       <h2 class="font-weight-light"> <v-icon left color="red">mdi-phone</v-icon> 0953166155</h2>
         </v-layout>
+         <div class="text--primary">
+           <v-icon class="blue--text text--lighten-2">mdi-web</v-icon><a href="https://shuqbara.com" target="_blank">www.shuqbara.com</a> <br>
+        <v-icon class="blue--text text--lighten-2">mdi-email</v-icon>fthialem@gmail.com<br>
+        <v-icon class="blue--text text--lighten-2">mdi-map-marker</v-icon>Axum, Tigray, Ethiopia <br>
+        <h2 class="font-weight-light" @click="$router.push('/getcomment')"> Give us feedback</h2> 
+            </div>
       </v-flex>
     </v-card>
     </v-flex>

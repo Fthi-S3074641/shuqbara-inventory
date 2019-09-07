@@ -15,6 +15,10 @@ export const mutations = {
 
   [types.SET_USER] (state, payload) {
     state.user = payload
+  },
+
+  [types.TURN_OFF] (state, payload) {
+    state.title.useTitle = payload
   }
 
 }

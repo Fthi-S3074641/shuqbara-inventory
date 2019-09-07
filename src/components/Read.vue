@@ -1,22 +1,18 @@
 <template>
   <v-row justify="center">
     <v-col cols="12" sm="10" md="8" lg="6">
-        <v-card flat>
+        <v-card flat class="transparent">
 
       <v-card-title >
-      <h2 class="mb-1 headline black--text">&nbsp;&nbsp;&nbsp;&nbsp; </h2>
-          <v-text-field
-            label="Search using a unique code"
-            placeholder="Write down Id"
-            prepend-icon="mdi-magnify"
-            clearable
-            required
-            v-model="searchString"
-          ></v-text-field>
-      </v-card-title>
+       <p > <v-icon @click="descendingList" color="primary"> mdi-arrow-down</v-icon> Order  <v-icon @click="increasingList" color="primary"> mdi-arrow-up</v-icon></p>
+      <v-spacer />
+      <v-btn  fab dark color="primary" @click="$router.push('/register')">
+      <v-icon > mdi-plus</v-icon>
+      </v-btn>
+            </v-card-title>
 
 <v-card-text>
-        <p justify="center" align="center"> Available Items: Order Decreasing <v-icon @click="descendingList" color="primary"> mdi-arrow-down</v-icon> Order Increasing  <v-icon @click="increasingList" color="primary"> mdi-arrow-up</v-icon></p>
+        
     <v-list three-line>
 
           <v-list-group
@@ -52,7 +48,7 @@
             <v-list-item-subtitle 
               v-for="subItem in item.iactivity"
               :key="subItem.title"
-              v-text="`${subItem.title} at:  ${subItem.idate}`"></v-list-item-subtitle>
+              v-text="`${subItem.title} ${subItem.idate}`"></v-list-item-subtitle>
           </v-list-item-content>
 
 
@@ -68,15 +64,34 @@
         </v-list-item>
         </v-list-group>
     </v-list>
+</v-card-text>
 
-    </v-card-text>
-    <v-card-actions>
-    <v-spacer />
-      <v-btn  fab dark color="primary" @click="$router.push('/register')">
-      <v-icon > mdi-plus</v-icon>
-      </v-btn>
-    </v-card-actions>
+<v-card-actions>
+<v-footer  justify="center" align="center"  position="fixed" :fixed="true"  :padless="true" :tile="true" height="100"> 
+  <v-row xs12 >
+  <v-col>
+  <div class="flex-grow-1"></div> </v-col>
+  <v-col cols="12" sm="10" md="8" lg="6">
+            <v-text-field
+            label="Search using a unique code"
+            placeholder="Write down Id"
+            append-icon="mdi-magnify"
+            clearable
+            required
+            v-model="searchString"
+          ></v-text-field>
+          </v-col>
+          <v-col>
+          <div class="flex-grow-1"></div>
+          </v-col>
+          </v-row>
+          </v-footer>
+</v-card-actions>
   </v-card>
+
+
+  
+
   </v-col>
   </v-row>
 </template>
@@ -147,6 +162,7 @@ export default {
     },
     created() {
       this.shuqbara = this.$store.state.allItems
+      // this.$store.dispatch('turnoffTitle', false)
     },
   }
 </script>

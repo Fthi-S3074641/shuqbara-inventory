@@ -104,7 +104,7 @@ export default {
           this.updateItem.itype = this.newitype
           this.updateItem.istate = "Modified"
           this.updateItem.iwhen = this.format(new Date())
-          this.updateItem.iactivity.push({title: `Modified`, idate: this.format(new Date())})
+          this.updateItem.iactivity.push({title: `*`, idate: this.format(new Date())})
           this.$store.dispatch('addItem', this.updateItem).then(() => {
             this.dialog = false
           });
