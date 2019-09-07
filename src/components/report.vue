@@ -11,7 +11,7 @@
       <v-card flat style="margin: 10px;">
       <v-flex xs12>
         <v-img
-          :src="require('../assets/logo.svg')"
+          :src="require('../assets/shuqbarapremium.svg')"
           class="my-3"
           contain
           height="200"
