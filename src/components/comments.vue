@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import format from "date-fns/format"
+import etdate from 'ethiopic-date'
 import { db } from './../firebase'
 
 export default {
@@ -71,16 +71,13 @@ export default {
       }
   },
   methods: {      
-    format(val) {
-        return format(val, "mm-dd-yyyy")
-      },
     submit() {
       const newFeedback = {
             fullName: this.$store.state.fullName,
             phoneNumber: this.$store.state.phoneNumber,
             feedbackTitle: this.feedbackTitle,
             mainFeedback: this.mainFeedback,
-            iwhen: this.format(new Date())
+            iwhen: etdate.now()
           }
 
             this.$firestore.feedbacks.add(newFeedback)

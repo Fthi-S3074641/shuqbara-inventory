@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import format from "date-fns/format"
+import etdate from 'ethiopic-date'
 import { db } from './../firebase';
 
 export default {
@@ -134,9 +134,6 @@ export default {
     },
 
     methods: {
-      format(val) {
-        return format(val, "mm-dd-yyyy")
-      },
       submit () {
         this.formHasErrors = false
 
@@ -151,7 +148,7 @@ export default {
             phoneNumber: this.phoneNumber,
             feedbackTitle: this.feedbackTitle,
             mainFeedback: this.mainFeedback,
-            iwhen: this.format(new Date())
+            iwhen: etdate.now()
           }
 
           this.$store.dispatch('setUser', {fullName: this.fullName, phoneNumber: this.phoneNumber}).then(() => {
