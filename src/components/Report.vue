@@ -8,7 +8,7 @@
       align-center
     >
     <v-flex xs12 sm10 md8>
-      <v-card flat style="margin: 10px;">
+      <v-card flat style="margin: 10px;" class="transparent elevation-0">
       <v-flex xs12>
         <v-img
           :src="require('../assets/shuqbarapremium.svg')"

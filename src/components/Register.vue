@@ -3,7 +3,7 @@
   <v-row justify="center">
 <v-col cols="12" sm="10" md="8" lg="6">
 
-<v-card flat class="elevation-0" ref="form" >
+<v-card flat class="transparent elevation-0" ref="form" >
       <v-card-title>
       <v-btn text @click="resetForm">Start Over</v-btn>
       <div class="flex-grow-1"></div>

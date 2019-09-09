@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <v-col cols="12" sm="10" md="8" lg="6">
-        <v-card flat class="transparent">
+        <v-card flat class="transparent elevation-0">
 
       <v-card-title >
        <p > <v-icon @click="descendingList" color="primary"> mdi-arrow-down</v-icon> Order  <v-icon @click="increasingList" color="primary"> mdi-arrow-up</v-icon></p>
@@ -13,7 +13,7 @@
 
 <v-card-text>
         
-    <v-list three-line>
+    <v-list three-line class="transparent elevation-0">
 
           <v-list-group
         v-for="(item, index) in filteredArticles"
@@ -73,8 +73,7 @@
   <div class="flex-grow-1"></div> </v-col>
   <v-col cols="12" sm="10" md="8" lg="6">
             <v-text-field
-            label="Search using a unique code"
-            placeholder="Write down Code/ID"
+            placeholder="Enter a unique code"
             append-icon="mdi-magnify"
             clearable
             required
