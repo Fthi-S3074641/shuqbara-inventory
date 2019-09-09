@@ -14,7 +14,8 @@ export const mutations = {
   },
 
   [types.SET_USER] (state, payload) {
-    state.user = payload
+    state.fullName = payload.fullName
+    state.phoneNumber = payload.phoneNumber
   }
 
 }

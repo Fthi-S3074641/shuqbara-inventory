@@ -67,7 +67,8 @@
 </template>
 
 <script>
-import etdate from "ethiopic-date"
+import etdate from 'ethiopic-date'
+
 export default {
     props: ['rcode'],
     data () {
@@ -89,6 +90,8 @@ export default {
           this.$store.dispatch('addItem', this.soldItem).then(()=> {
             this.dialog = false
             this.sold = true
+            const shuqbara = JSON.stringify(this.$store.state.allItems)
+            window.localStorage.setItem('shuqbara', shuqbara)
           });
         });
 
@@ -114,10 +117,6 @@ export default {
     created() {
       this.soldItem = this.getAll[this.getIndex]
 
-    },
-    beforeDestroy() {
-       const shuqbara = JSON.stringify(this.$store.state.allItems)
-        window.localStorage.setItem('shuqbara', shuqbara)
-    },
+    }
   }
 </script>

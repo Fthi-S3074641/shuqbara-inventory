@@ -1,34 +1,37 @@
 <template>
-  <v-app dense>
+  <v-app dense style="background: rgba(0,0,0,0);" class="elevation-0">
     <!-- Start of Navigation -->
-    <nav>
+    <nav style="background: rgba(0,0,0,0);" class="elevation-0">
       <!-- Start of app toolbar -->
-      <v-app-bar app flat dense>
+      <v-app-bar app flat dense style="background: rgba(0,0,0,0);" class="elevation-0">
         <v-app-bar-nav-icon
           @click.stop="drawer = !drawer"
           class="hidden-md-and-up"
         ></v-app-bar-nav-icon>
-        <v-toolbar-title class="headline text-uppercase">
-          <span @click="$router.push('/')"> Shuqbara </span>
-          <span class="font-weight-light" @click="$router.push('/read')"> Inventory</span>
+        <v-toolbar-title class="headline text-uppercase" v-if="getTitle.useTitle">
+          <span @click="$router.push('/')"> {{getTitle.mainTitle}} </span>
+          <span class="font-weight-light" @click="$router.push('/read')"> {{getTitle.subTitle}} </span>
           </v-toolbar-title>
         <v-spacer></v-spacer>
 
         <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn 
+          <v-btn
           v-for="(it, index) in items"
           :key="index"
-          :to="it.link" text exact> {{ it.text}} </v-btn>
+          :to="it.link" text exact class="elevation-0"> {{ it.text}} 
+          </v-btn>
+
+          <v-btn text exact :to="getLink"> Comments </v-btn>
         </v-toolbar-items>
       </v-app-bar>
       <!-- End of app toolbar -->
 
       <!-- Start of mobile side menu -->
-      <v-navigation-drawer app v-model="drawer" left>
+      <v-navigation-drawer app v-model="drawer" left >
         <!-- Menu title -->
         <v-app-bar flat>
           <v-list>
-            <v-subheader class="title"> Shuqbara Manager </v-subheader>
+            <v-subheader class="title"> Shuqbara </v-subheader>
           </v-list>
         </v-app-bar>
         <v-divider></v-divider>
@@ -44,8 +47,16 @@
             <v-icon v-text="item.icon"></v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title v-text="item.text"></v-list-item-title>
+             <v-list-item-title v-text="item.text"></v-list-item-title>
           </v-list-item-content>
+        </v-list-item>
+        <v-list-item :to="getLink">
+          <v-list-item-icon>
+            <v-icon> mdi-information-variant</v-icon>
+              <v-list-item-content>
+                <v-list-item-title> Comments</v-list-item-title>
+              </v-list-item-content>
+          </v-list-item-icon>
         </v-list-item>
       </v-list-item-group>
         </v-list>
@@ -68,18 +79,35 @@ export default {
             drawer: false,
             item: 1,
             items: [
-                { text: 'Register', icon: 'mdi-folder-outline', link: '/register' },
+                { text: 'Register', icon: 'mdi-plus', link: '/register' },
                 { text: 'Read', icon: 'mdi-folder-edit-outline', link: '/read' },
-                { text: 'Report', icon: 'mdi-collapse-all', link: '/report' },
-                { text: 'Feedback', icon: 'mdi-comment-outline', link: '/feedback' },
-                { text: 'Made In', icon: 'mdi-heart-outline', link: '/developer' }
-            ]
+                { text: 'Report', icon: 'mdi-collapse-all', link: '/report' }
+            ],
+            searchString: 'ftu'
         }
     },
     methods: {
     goThere(distnation){
       this.$router.push(distnation)
     }
+  },
+  computed: {
+    getLink() {
+      if(this.$store.state.fullName !== null && this.$store.state.phoneNumber !== null){
+        return '/comments'
+      }
+      else {
+        return '/getcomment'
+      }
+    },
+    getTitle() {
+      return this.$store.state.title
+    }
+  },
+  mounted() {
+    const shuqName = JSON.parse(window.localStorage.getItem('shuqName'))
+    const shuqPhone = JSON.parse(window.localStorage.getItem('shuqPhone'))
+    this.$store.dispatch('setUser', {fullName: shuqName, phoneNumber: shuqPhone})
   }
 }
 </script>

@@ -64,7 +64,9 @@
       },
       yesRemove() {
       this.$store.dispatch('removeItem', this.getIndex).then(()=>{
-                this.dialog = false
+        this.dialog = false
+        const shuqbara = JSON.stringify(this.$store.state.allItems)
+        window.localStorage.setItem('shuqbara', shuqbara)
       });
 
       }
@@ -77,10 +79,6 @@
         getAll() {
           return this.$store.state.allItems
         }
-    },
-    beforeDestroy() {
-       const shuqbara = JSON.stringify(this.$store.state.allItems)
-        window.localStorage.setItem('shuqbara', shuqbara)
-    },
+    }
   }
 </script>
