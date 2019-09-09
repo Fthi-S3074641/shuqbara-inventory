@@ -8,7 +8,7 @@
       align-center
     >
     <v-flex xs12 sm10 md8>
-      <v-card flat style="margin: 10px;">
+      <v-card flat style="margin: 10px;" class="transparent elevation-0">
       <v-card-title>
       <v-row justify="center" align="center">
       <v-col cols="12" sm="10" md="8" lg="6">
