@@ -8,7 +8,8 @@ Vue.use(Vuex)
 const state = {
     allItems: [],
     currentItem: {},
-    user: {},
+    fullName: null,
+    phoneNumber: null,
     title: {
         mainTitle: 'Shuqbara',
         subTitle: 'Inventory',

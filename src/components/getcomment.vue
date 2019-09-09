@@ -1,16 +1,16 @@
 <template >
 <v-app>
   <v-row justify="center">
-<v-col cols="12" sm="10" md="8" lg="6">
+  <v-col cols="12" sm="10" md="8" lg="6">
 
-<v-card flat class="transparent" ref="form" >
+  <v-card flat class="elevation-0" ref="form" >
       <v-card-title>
         <div class="flex-grow-1"></div>
         <v-btn color="primary" :disabled="!formisValid" @click="submit">Submit</v-btn>
       </v-card-title>
 
-<v-card-text>
-  <v-stepper v-model="e6" vertical>
+  <v-card-text>
+  <v-stepper v-model="e6" vertical class="elevation-0">
   <v-stepper-step :complete="e6 > 1" step="1">
       Enter details
       <small>Name & Phone number Only</small>
@@ -49,7 +49,7 @@
 
     <v-stepper-content step="2">
                  <v-text-field
-            placeholder="Give a title"
+            placeholder="Main Title"
             clearable
             outlined
             required
@@ -59,7 +59,6 @@
         ></v-text-field>
         <v-textarea
           outlined
-          name="input-7-4"
           label="Write all Your feedback"
           value="..."
           ref="mainFeedback"
@@ -82,6 +81,7 @@
 
 <script>
 import format from "date-fns/format"
+import { db } from './../firebase';
 
 export default {
     data() {
@@ -93,6 +93,11 @@ export default {
         feedbackTitle: null,
         errorMessages: '',
         formHasErrors: false
+      }
+    },
+    firestore() {
+      return {
+        feedbacks: db.collection('feedbacks')
       }
     },
     computed: {
@@ -149,17 +154,31 @@ export default {
             iwhen: this.format(new Date())
           }
 
-          this.$router.push({name: '/comments', params: {feedback: newFeedback}})
+          this.$store.dispatch('setUser', {fullName: this.fullName, phoneNumber: this.phoneNumber}).then(() => {
+            this.$router.push({name: '/comments', params: {feedback: newFeedback}})
+            const shuqName = JSON.stringify(this.$store.state.fullName)
+            const shuqPhone = JSON.stringify(this.$store.state.phoneNumber)
+            window.localStorage.setItem('shuqName', shuqName)
+            window.localStorage.setItem('shuqPhone', shuqPhone)
+            this.$firestore.feedbacks.add(newFeedback)
+          })
+          
 
       },
       cancel() {
         this.$router.go(-1)
       }
     },
-    beforeDestroy() {
-       const shuqbara = JSON.stringify(this.$store.state.allItems)
-        window.localStorage.setItem('shuqbara', shuqbara)
-    },
+  mounted() {
+        const shuqName = JSON.parse(window.localStorage.getItem('shuqName'))
+    const shuqPhone = JSON.parse(window.localStorage.getItem('shuqPhone'))
+    this.$store.dispatch('setUser', {fullName: shuqName, phoneNumber: shuqPhone})
+  },
+  created() {
+    if(this.$store.state.fullName !== null || this.$store.state.phoneNumber !== null){
+      this.$router.push('/comments')
+    }
+  }
 
   }
 </script>

@@ -80,7 +80,8 @@
 </template>
 
 <script>
-import format from "date-fns/format"
+import etdate from 'ethiopic-date'
+
 export default {
     props: ['scode'],
     data () {
@@ -92,18 +93,18 @@ export default {
       }
     },
     methods: {
-      format(val) {
-        return format(val, "mm-dd-yyyy")
-      },
       sellOne() {
         const indx = this.getIndex
         const oldq = this.soldItem.iquantity
+
         this.$store.dispatch('removeItem', indx).then(()=> {
-          this.soldItem.iquantity = oldq - this.amount
-          this.soldItem.iactivity.push({title: `-${this.amount}`, idate: this.format(new Date())})
+          this.soldItem.iquantity = parseInt(oldq) - parseInt(this.amount)
+          this.soldItem.iactivity.push({title: `-${this.amount},`, idate: etdate.now()})
           this.$store.dispatch('addItem', this.soldItem).then(()=> {
             this.dialog = false
             this.sold = true
+            const shuqbara = JSON.stringify(this.$store.state.allItems)
+            window.localStorage.setItem('shuqbara', shuqbara)
           });
         });
 
@@ -128,10 +129,6 @@ export default {
     },
     created() {
       this.soldItem = this.getAll[this.getIndex]
-    },
-    beforeDestroy() {
-       const shuqbara = JSON.stringify(this.$store.state.allItems)
-        window.localStorage.setItem('shuqbara', shuqbara)
-    },
+    }
   }
 </script>

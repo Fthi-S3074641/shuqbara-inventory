@@ -1,9 +1,9 @@
 <template>
-  <v-app dense style="background: rgba(0,0,0,0);" class="transparent">
+  <v-app dense style="background: rgba(0,0,0,0);" class="elevation-0">
     <!-- Start of Navigation -->
-    <nav style="background: rgba(0,0,0,0);" class="transparent">
+    <nav style="background: rgba(0,0,0,0);" class="elevation-0">
       <!-- Start of app toolbar -->
-      <v-app-bar app flat dense style="background: rgba(0,0,0,0);" class="transparent">
+      <v-app-bar app flat dense style="background: rgba(0,0,0,0);" class="elevation-0">
         <v-app-bar-nav-icon
           @click.stop="drawer = !drawer"
           class="hidden-md-and-up"
@@ -13,23 +13,12 @@
           <span class="font-weight-light" @click="$router.push('/read')"> {{getTitle.subTitle}} </span>
           </v-toolbar-title>
         <v-spacer></v-spacer>
-                  <v-toolbar-title v-if="!getTitle.useTitle">
-                <h2 class="mb-1 headline black--text">&nbsp;&nbsp;&nbsp;&nbsp; </h2>
-            <v-text-field
-            label="Search using a unique code"
-            placeholder="Write down Id"
-            append-icon="mdi-magnify"
-            clearable
-            required
-            v-model="searchString"
-          ></v-text-field>
-          </v-toolbar-title>
 
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn
           v-for="(it, index) in items"
           :key="index"
-          :to="it.link" text exact> {{ it.text}} 
+          :to="it.link" text exact class="elevation-0"> {{ it.text}} 
           </v-btn>
 
           <v-btn text exact :to="getLink"> Comments </v-btn>
@@ -104,11 +93,21 @@ export default {
   },
   computed: {
     getLink() {
-      return '/getcomment'
+      if(this.$store.state.fullName !== null && this.$store.state.phoneNumber !== null){
+        return '/comments'
+      }
+      else {
+        return '/getcomment'
+      }
     },
     getTitle() {
       return this.$store.state.title
     }
+  },
+  mounted() {
+    const shuqName = JSON.parse(window.localStorage.getItem('shuqName'))
+    const shuqPhone = JSON.parse(window.localStorage.getItem('shuqPhone'))
+    this.$store.dispatch('setUser', {fullName: shuqName, phoneNumber: shuqPhone})
   }
 }
 </script>

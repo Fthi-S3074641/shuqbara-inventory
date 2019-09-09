@@ -59,10 +59,6 @@ export default {
             this.$router.push('/read')
         }
     }
-  },
-  beforeDestroy() {
-       const shuqbara = JSON.stringify(this.$store.state.allItems)
-        window.localStorage.setItem('shuqbara', shuqbara)
-    },
+  }
 };
 </script>

@@ -67,14 +67,14 @@
 </v-card-text>
 
 <v-card-actions>
-<v-footer  justify="center" align="center"  position="fixed" :fixed="true"  :padless="true" :tile="true" height="100"> 
+<v-footer  class="transparent elevation-0" position="fixed" :fixed="true"  :padless="true" :tile="true" height="70"> 
   <v-row xs12 >
   <v-col>
   <div class="flex-grow-1"></div> </v-col>
   <v-col cols="12" sm="10" md="8" lg="6">
             <v-text-field
             label="Search using a unique code"
-            placeholder="Write down Id"
+            placeholder="Write down Code/ID"
             append-icon="mdi-magnify"
             clearable
             required
@@ -155,10 +155,6 @@ export default {
       Sell,
       Edit,
       Restock
-    },
-    beforeDestroy() {
-       const shuqbara = JSON.stringify(this.$store.state.allItems)
-        window.localStorage.setItem('shuqbara', shuqbara)
     },
     created() {
       this.shuqbara = this.$store.state.allItems

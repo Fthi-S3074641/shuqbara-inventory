@@ -3,15 +3,15 @@
   <v-row justify="center">
 <v-col cols="12" sm="10" md="8" lg="6">
 
-<v-card flat class="transparent" ref="form" >
+<v-card flat class="elevation-0" ref="form" >
       <v-card-title>
       <v-btn text @click="resetForm">Start Over</v-btn>
       <div class="flex-grow-1"></div>
-      <v-btn color="primary" :disabled="!formisValid" @click="submit">Register</v-btn>
+      <v-btn color="primary" :disabled="!formisValid" @click="submit" text>Register</v-btn>
 </v-card-title>
 
 <v-card-text>
-  <v-stepper v-model="e6" vertical flat class="transparent" style="background: rgba(0,0,0,0);">
+  <v-stepper v-model="e6" vertical flat class="elevation-0" style="background: rgba(0,0,0,0);">
     <v-stepper-step :complete="e6 > 1" step="1">
       Code or ID
       <small>unique name for the new Item</small>
@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import format from "date-fns/format"
+import etdate from 'ethiopic-date'
 
 export default {
     data() {
@@ -147,9 +147,6 @@ export default {
     },
 
     methods: {
-      format(val) {
-        return format(val, "mm-dd-yyyy")
-      },
       resetForm () {
         this.errorMessages = []
         this.formHasErrors = false
@@ -175,21 +172,19 @@ export default {
             ibrand: this.ibrand,
             itype: this.itype,
             istate: "Created",
-            iwhen: this.format(new Date()),
+            iwhen: etdate.now(),
             iactivity: [ ]
           }
           this.$store.dispatch('addItem', inew).then(()=> {
+                const shuqbara = JSON.stringify(this.$store.state.allItems)
+                window.localStorage.setItem('shuqbara', shuqbara)
                 this.$router.push('/read')
               });
       },
       cancel() {
         this.$router.go(-1)
       }
-    },
-    beforeDestroy() {
-       const shuqbara = JSON.stringify(this.$store.state.allItems)
-        window.localStorage.setItem('shuqbara', shuqbara)
-    },
+    }
 
   }
 </script>

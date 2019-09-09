@@ -75,7 +75,8 @@
 </template>
 
 <script>
-import format from "date-fns/format"
+import etdate from 'ethiopic-date'
+
 export default {
     props: ['ecode'],
     data () {
@@ -88,9 +89,6 @@ export default {
       }
     },
     methods: {
-      format(val) {
-        return format(val, "mm-dd-yyyy")
-      },
       cancel() {
         this.dialog = false
         
@@ -103,10 +101,11 @@ export default {
           this.updateItem.ibrand = this.newibrand
           this.updateItem.itype = this.newitype
           this.updateItem.istate = "Modified"
-          this.updateItem.iwhen = this.format(new Date())
-          this.updateItem.iactivity.push({title: `*`, idate: this.format(new Date())})
+          this.updateItem.iwhen = etdate.now()
           this.$store.dispatch('addItem', this.updateItem).then(() => {
             this.dialog = false
+            const shuqbara = JSON.stringify(this.$store.state.allItems)
+            window.localStorage.setItem('shuqbara', shuqbara)
           });
         });
       }
@@ -125,10 +124,6 @@ export default {
       this.newicode = this.ecode
       this.newibrand = this.updateItem.ibrand
       this.newitype = this.updateItem.itype
-    },
-    beforeDestroy() {
-       const shuqbara = JSON.stringify(this.$store.state.allItems)
-        window.localStorage.setItem('shuqbara', shuqbara)
-    },
+    }
   }
 </script>
