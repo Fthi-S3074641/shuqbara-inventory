@@ -2,17 +2,18 @@ import Vue from 'vue'
 import Vrouter from 'vue-router'
 
 import welcome from './../views/welcome'
-import main from './../views/main'
-
-import Register from './../components/Register'
-import Read from './../components/Read'
-import Report from './../components/Report'
-import getcomment from './../components/getcomment'
-import comments from './../components/comments'
+import register from './../views/register'
+import read from './../views/read'
+import report from './../views/report'
+import getcomment from './../views/getcomment'
+import comments from './../views/comments'
 
 Vue.use(Vrouter)
 
 export default new Vrouter({
+    scrollBehavior() {
+        return { x: 0, y: 0 };
+      },
     routes: [
         {
             path: '/',
@@ -20,37 +21,30 @@ export default new Vrouter({
             component: welcome
         },
         {
-            path: '/new',
-            name: '/new',
-            component: main,
-            children: [
-                {
-                    path: '/register',
-                    name: '/register',
-                    component: Register
-                },
-                {
-                    path: '/read',
-                    name: '/read',
-                    component: Read
-                },
-                {
-                    path: '/report',
-                    name: '/report',
-                    component: Report
-                },
-                {
-                    path: '/getcomment',
-                    name: '/getcomment',
-                    component: getcomment
-                },
-                {
-                    path: '/comments',
-                    name: '/comments',
-                    component: comments,
-                    props: true
-                }
-            ]
+            path: '/register',
+            name: '/register',
+            component: register
+        },
+        {
+            path: '/read',
+            name: '/read',
+            component: read
+        },
+        {
+            path: '/report',
+            name: '/report',
+            component: report
+        },
+        {
+            path: '/getcomment',
+            name: '/getcomment',
+            component: getcomment
+        },
+        {
+            path: '/comments',
+            name: '/comments',
+            component: comments
         }
-    ]
+    ],
+    mode: 'history'
 })

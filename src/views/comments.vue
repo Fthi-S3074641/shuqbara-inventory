@@ -1,19 +1,18 @@
 <template>
-  <v-app dense style="background: rgba(0,0,0,0);" class="elevation-0">
+  <v-app>
     <!-- Start of Navigation -->
-    <nav style="background: rgba(0,0,0,0);" class="elevation-0">
+    <nav>
       <!-- Start of app toolbar -->
-      <v-app-bar app flat dense style="background: rgba(0,0,0,0);" class="elevation-0">
+      <v-app-bar app class="elevation-0">
         <v-app-bar-nav-icon
           @click.stop="drawer = !drawer"
           class="hidden-md-and-up"
         ></v-app-bar-nav-icon>
-        <v-toolbar-title class="headline text-uppercase" v-if="getTitle.useTitle">
-          <span @click="$router.push('/')"> {{getTitle.mainTitle}} </span>
-          <span class="font-weight-light" @click="$router.push('/read')"> {{getTitle.subTitle}} </span>
+        <v-toolbar-title class="headline" >
+          <span class="font-weight-light" @click="$router.push('/')"> Leave a Comment </span>
           </v-toolbar-title>
-        <v-spacer></v-spacer>
 
+        <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn
           v-for="(it, index) in items"
@@ -52,9 +51,9 @@
         </v-list-item>
         <v-list-item :to="getLink">
           <v-list-item-icon>
-            <v-icon> mdi-information-variant</v-icon>
+            <v-icon color="red" v-text="'mdi-heart'"> </v-icon>
               <v-list-item-content>
-                <v-list-item-title> Comments</v-list-item-title>
+                <v-list-item-title>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comment </v-list-item-title>
               </v-list-item-content>
           </v-list-item-icon>
         </v-list-item>
@@ -65,49 +64,67 @@
     </nav>
     <!-- End of Navigation -->
 
-    <v-content style="padding: 0px;">
-    <router-view> </router-view>
-    </v-content>
-  </v-app>
+  <v-content style="padding: 0px;">
+    <Commentie />
+  </v-content>
+  
+  <v-footer app fixed class="transparent elevation-0">
+      <Feedbacker />
+  </v-footer>
+</v-app>
+
 </template>
 
 <script>
+import { db } from './../firebase'
+import Feedbacker from './../components/feedback'
+import Commentie from './../components/comments'
 
 export default {
-    data(){
-        return {
-            drawer: false,
-            item: 1,
-            items: [
+  props: ['feedback'],
+  data() {
+    return {
+      feedbacks: [],
+      e6: 1,
+        drawer: false,
+        item: 1,
+        items: [
                 { text: 'Register', icon: 'mdi-plus', link: '/register' },
                 { text: 'Read', icon: 'mdi-folder-edit-outline', link: '/read' },
                 { text: 'Report', icon: 'mdi-collapse-all', link: '/report' }
-            ],
-            searchString: 'ftu'
-        }
-    },
-    methods: {
-    goThere(distnation){
-      this.$router.push(distnation)
+        ],
+        searchString: 'ftu',
     }
+  },
+  firestore() {
+      return {
+        feedbacks: db.collection('feedbacks')
+      }
+  },
+  components: {
+    Feedbacker,
+    Commentie
   },
   computed: {
     getLink() {
       if(this.$store.state.fullName !== null && this.$store.state.phoneNumber !== null){
         return '/comments'
       }
-      else {
-        return '/getcomment'
-      }
+      else {             return '/getcomment'         }
     },
     getTitle() {
       return this.$store.state.title
-    }
+    },
   },
   mounted() {
-    const shuqName = JSON.parse(window.localStorage.getItem('shuqName'))
+        const shuqName = JSON.parse(window.localStorage.getItem('shuqName'))
     const shuqPhone = JSON.parse(window.localStorage.getItem('shuqPhone'))
     this.$store.dispatch('setUser', {fullName: shuqName, phoneNumber: shuqPhone})
+  },
+  created() {
+    if(this.$store.state.fullName === null || this.$store.state.phoneNumber === null){
+      this.$router.push('/getcomment')
+    }
   }
 }
 </script>

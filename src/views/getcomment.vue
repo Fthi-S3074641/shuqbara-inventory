@@ -5,6 +5,7 @@
 
   <v-card flat class="transparent elevation-0" ref="form" >
       <v-card-title>
+      <v-btn text color="secondary" @click="$router.push('/read')">Exit</v-btn>
         <div class="flex-grow-1"></div>
         <v-btn color="primary" :disabled="!formisValid" @click="submit">Submit</v-btn>
       </v-card-title>
@@ -27,6 +28,7 @@
              :rules="[() => !!fullName || 'This field is required']"
           ></v-text-field>
           <v-text-field
+           v-on:keyup.enter="e6 = 2"
             placeholder="Phone number"
             preppend-icon="mdi-phone"
             clearable
@@ -37,9 +39,9 @@
              :rules="[() => !!phoneNumber || 'Only numbers supported']"
           ></v-text-field>
           <v-row align="center" justify="center" style="margin: 3px;">
-      <v-btn color="primary" :disabled="fullName == null || phoneNumber == null || isNotNumber" @click="e6 = 2">Continue</v-btn>
-      <div class="flex-grow-1"></div>
       <v-btn text @click="$router.go(-1)">Cancel</v-btn>
+      <div class="flex-grow-1"></div>
+      <v-btn text color="primary" :disabled="fullName == null || phoneNumber == null || isNotNumber" @click="e6 = 2">Continue</v-btn>
       </v-row>
     </v-stepper-content>
 
@@ -58,6 +60,7 @@
              :rules="[() => !!feedbackTitle || 'This field is required']"
         ></v-text-field>
         <v-textarea
+           v-on:keyup.enter="submit"
           outlined
           label="Write all Your feedback"
           value="..."
@@ -68,7 +71,7 @@
            <v-row align="center" justify="center" style="margin: 3px;">
             <v-btn text @click="e6 = 1">Go back</v-btn>
             <div class="flex-grow-1"></div>
-            <v-btn color="primary" :disabled="!formisValid" @click="submit">Submit</v-btn>
+            <v-btn text color="primary" :disabled="!formisValid" @click="submit">Submit</v-btn>
           </v-row>
           </v-stepper-content>
       </v-stepper>
@@ -126,13 +129,6 @@ export default {
         }
       }
     },
-
-    watch: {
-      name () {
-        this.errorMessages = ''
-      },
-    },
-
     methods: {
       submit () {
         this.formHasErrors = false

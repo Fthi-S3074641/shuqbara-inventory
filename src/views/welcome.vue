@@ -1,11 +1,11 @@
 <template>
     <v-app>
-        <welcomePage />
+        <welcome />
     </v-app>
 </template>
 
 <script>
-import welcomePage from './../components/welcomePage'
+import welcome from './../components/welcome'
 export default {
     data(){
         return {
@@ -13,7 +13,7 @@ export default {
         }
     },
     components: {
-        welcomePage
+        welcome
     }
 }
 </script>

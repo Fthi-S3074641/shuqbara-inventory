@@ -1,50 +1,36 @@
 <template>
   <div class="text-center">
-    <v-dialog
-      v-model="dialog"
-      persistent
-      width="500"
-    >
+    <v-dialog v-model="dialog" persistent width="500" >
       <template v-slot:activator="{ on }">
-            <v-btn icon v-on="on">
-                <v-icon >mdi-cart-plus</v-icon>
-            </v-btn>
+            <v-btn icon v-on="on"> <v-icon color="primary lighten-1" >mdi-cart-plus</v-icon> </v-btn>
       </template>
-
       <v-card>
         <v-card-title
           class="primary headline grey lighten-2"
           primary-title>
-          Restock item "{{rcode}}"
+          Adding: "{{rcode}}"
         </v-card-title>
 
         <v-card-text>
-
-        <v-container>
             <v-row justify="center" color="primary">
             <v-col cols="12" sm="8">
-                <p>  An item of code 
-                "<span class="font-weight-bold">{{rcode}}</span>" 
-                will be added to your store. Therefore the quantity of available items will increased by {{amount}}. 
-                Confirm if {{amount}} item is added?</p>
+                <p>  The quantity of available items will increase by {{amount}}. <br>
+                Are you sure you want to add {{amount}} item to "<span class="font-weight-bold">{{rcode}}</span>"?</p>
             <v-text-field
                 label="Quantity"
                 clearable
+                 min="0" 
+                 v-on:keyup.enter="sellOne"
                 outlined
                 v-model="amount"
                 type="number"
             ></v-text-field>
-            <v-divider></v-divider>
             <p  class="font-weight-bold red--text" 
-            v-if="!quantityEnough">Are you sure you wouldlike to add {{amount}} items</p>
+            v-if="!quantityEnough">Must be Positive & less than total number</p>
             </v-col>
             </v-row>
-        </v-container>
     </v-card-text>
-            
-
             <v-card-actions>
-                <div class="flex-grow-1"></div>
                     <v-btn
                     color="secondary"
                     text
@@ -52,11 +38,12 @@
                 >
                     Cancel
                 </v-btn>
-                <v-spacer />
+                <div class="flex-grow-1"></div>
                 <v-btn
                     color="primary"
                     text
                     @click="sellOne()"
+                    :disabled="!quantityEnough"
                 >
                     Confirm
                 </v-btn>
@@ -75,7 +62,7 @@ export default {
       return {
         dialog: false,
         sold: false,
-        amount: 1,
+        amount: null,
         soldItem: {}
       }
     },
@@ -111,7 +98,9 @@ export default {
         return this.$store.state.allItems
       },
       quantityEnough() {
-        return this.amount <= this.soldItem.iquantity
+        return (
+          parseInt(this.amount) >= 1
+          )
       }
     },
     created() {

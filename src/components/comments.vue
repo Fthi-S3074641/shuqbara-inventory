@@ -1,98 +1,66 @@
 <template>
-  <v-timeline>
-    <v-timeline-item
-      v-for="(feed, index) in feedbacks"
-      :key="index"
-      color="red lighten-2"
-      small
-    >
-      <template v-slot:opposite>
-        <span>{{feed.fullName}} <br> <small> {{feed.phoneNumber}}</small></span>
-      </template>
-      <v-card class="elevation-0">
-        <v-card-title class="title font-weight-regular">{{feed.feedbackTitle}}</v-card-title>
-        <v-card-text>
-          {{feed.mainFeedback}}.
-          <span><small>{{ feed.iwhen}} </small></span>
-        </v-card-text>
-      </v-card>
-    </v-timeline-item>
-      <v-row justify="center">
-  <v-col cols="12" sm="10" md="8" lg="6">
-<v-stepper v-model="e6" vertical class="elevation-0">
-    <v-stepper-content step="1">
+      <v-row justify="center" flat class="transparent elevation-0">
+        <v-col cols="12" sm="10" md="8" lg="6">
+<v-list flat class="transparent elevation-0">
+      <v-list-item-group flat class="transparent elevation-0">
+        <v-list-item v-for="(feed, index) in feedbacks" :key="index" flat class="transparent elevation-0">
 
-          <v-text-field
-            placeholder="Main Title"
-            clearable
-            outlined
-            required
-            v-model="feedbackTitle"
-             :rules="[() => !!feedbackTitle || 'This field is required']"
-        ></v-text-field>
-        <v-textarea
-          outlined
-          clearable
-          required
-          label="Write all Your feedback"
-          value="..."
-          v-model="mainFeedback"
-          :rules="[() => !!mainFeedback || 'This field is required']"
-        ></v-textarea>
-           <v-row align="center" justify="center" style="margin: 3px;">
-            <v-btn text @click="$router.go(-1)">Exit</v-btn>
-            <div class="flex-grow-1"></div>
-            <v-btn color="primary" :disabled="!mainFeedback || !feedbackTitle" @click="submit" text>Submit</v-btn>
-          </v-row>
-          </v-stepper-content>
-</v-stepper>
+          <v-list-item-content>
+             <v-card flat class="transparent elevation-0" >
+                <v-card-title>
+                  <v-chip>
+                    <v-avatar left color="primary lighten-2" > {{feed.fullName[0]}} </v-avatar>
+                  {{feed.fullName}}&nbsp; &mdash; &nbsp; {{feed.phoneNumber}}
+                  </v-chip>
+                </v-card-title>
+                <v-card-text>
+                <span class="font-weight-bold"> {{feed.feedbackTitle}} <br>
+                    <span class="font-weight-light"> {{feed.mainFeedback}}.</span>
+                    </span>
+                    <div :inset="true">
+                <span class="font-weight-light flex-grow-1">{{ feed.iwhen}} 
+                <v-btn class="flex-grow-1" icon @click="fDelete(feed)" v-if="feed.phoneNumber === getPhone">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<v-icon color="red lighten-2" >mdi-delete</v-icon>
+                </v-btn>
+                </span>
+                </div>
+                </v-card-text>
+                                
+
+            </v-card>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-item-group>
+    </v-list>
 </v-col>
 </v-row>
-  </v-timeline>
 </template>
 
 <script>
-import etdate from 'ethiopic-date'
 import { db } from './../firebase'
-
 export default {
-  props: ['feedback'],
-  data() {
-    return {
-      feedbacks: [],
-      mainFeedback: null,
-      feedbackTitle: null,
-      e6: 1
-    }
-  },
+    data() {
+        return {
+            feedbacks: []
+        }
+    },
   firestore() {
       return {
         feedbacks: db.collection('feedbacks')
       }
   },
-  methods: {      
-    submit() {
-      const newFeedback = {
-            fullName: this.$store.state.fullName,
-            phoneNumber: this.$store.state.phoneNumber,
-            feedbackTitle: this.feedbackTitle,
-            mainFeedback: this.mainFeedback,
-            iwhen: etdate.now()
+  methods: {
+      fDelete(feed) {
+          if(this.$store.state.phoneNumber === feed.phoneNumber){
+            this.$firestore.feedbacks.doc(feed['.key']).delete()
+            this.$router.push('/comments');
           }
-
-            this.$firestore.feedbacks.add(newFeedback)
-            // this.$router.push({name: '/comments', params: {feedback: newFeedback}})
-    }
+      }
   },
-  mounted() {
-        const shuqName = JSON.parse(window.localStorage.getItem('shuqName'))
-    const shuqPhone = JSON.parse(window.localStorage.getItem('shuqPhone'))
-    this.$store.dispatch('setUser', {fullName: shuqName, phoneNumber: shuqPhone})
-  },
-  created() {
-    if(this.$store.state.fullName === null || this.$store.state.phoneNumber === null){
-      this.$router.push('/getcomment')
-    }
+  computed: {
+      getPhone() {
+          return this.$store.state.phoneNumber
+      }
   }
 }
 </script>
