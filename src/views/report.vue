@@ -26,9 +26,9 @@
       <v-flex mb-5 xs12 >
         <v-layout justify-center>
             <h2 class="font-weight-light"> 
-            <span @click="$router.push('/getcomment')">
+            <span>
             <v-icon left color="red">mdi-comment-text</v-icon> 
-                <v-btn outlined color="red lighten-1" large @click="goThere('/getcomment')"> Coming Up Soon! </v-btn> </span>
+                <v-btn outlined color="red lighten-1" large @click="goThere('/comments')"> Coming Up Soon! </v-btn> </span>
                 </h2> 
         </v-layout>
         <br>
@@ -45,15 +45,15 @@
     <v-layout justify="center">
     <v-flex mb-5 xs12 >
         <div class="text--primary">
-            <h5 class="font-weight-light">
+            <h4 class="font-weight-light">
             <v-icon small>mdi-phone</v-icon> 
             +251953166155 &nbsp;   
             <v-icon small>mdi-email</v-icon>
-            fthialem@gmail.com </h5>
-            <h5 class="font-weight-light"> 
+            fthialem@gmail.com </h4>
+            <h4 class="font-weight-light"> 
             <v-icon small>mdi-web</v-icon>
             Visit our website 
-            www.shuqbara.com </h5>
+            www.shuqbara.com </h4>
         </div>
         </v-flex>
         </v-layout>

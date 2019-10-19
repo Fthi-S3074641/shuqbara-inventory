@@ -18,7 +18,7 @@
                   <div class="flex-grow-1"></div>
                 <v-btn text color="primary" :disabled="icode == null || (nameExist !== -1)" @click="e6 = 2" style="margin-right: 15px; margin-bottom: 5px;" outlined>Continue</v-btn>
             </v-row>
-            <v-text-field autofocus v-on:keyup.enter="e6 = 2" outlined placeholder="ID" clearable  required ref="icode" v-model="icode" :rules="[() => !!icode || 'This field is required']" ></v-text-field>
+            <v-text-field autofocus v-on:keyup.enter="e6 = 2" outlined placeholder="ID" clearable  required ref="icode" v-model.trim="icode" :rules="[() => !!icode || 'This field is required']" ></v-text-field>
              <p class="red--text" v-if="(nameExist !== -1)"> Duplicated name. Make it unique </p>
         </v-stepper-content>
 
@@ -99,7 +99,7 @@ export default {
         })
         
             const inew = {
-            icode: this.icode,
+            icode: this.getCode,
             iquantity: parseInt(this.iquantity),
             ibrand: this.ibrand,
             itype: this.itype,
@@ -108,14 +108,22 @@ export default {
             iactivity: [{title: 'New: ', idate: etdate.now()} ]
           }
           this.$store.dispatch('addItem', inew).then(()=> {
-                const shuqbara = JSON.stringify(this.$store.state.allItems)
-                window.localStorage.setItem('shuqbara', shuqbara)
+                window.localStorage.setItem('shuqbara', JSON.stringify(this.$store.state.allItems))
                 this.$router.push('/read')
               });
       },
       cancel() {
         this.$router.go(-1)
-      }
+      },
+      // goSubmit() {
+        // for (var i = 0; i < 10000; i++) {
+        // this.icode = i
+        // this.submit()
+        // }
+        //  window.localStorage.setItem('shuqbara', JSON.stringify(this.$store.state.allItems))
+        //  this.$router.push('/read')
+
+      // }
     },
     computed: {
         form () {
@@ -130,12 +138,13 @@ export default {
         return this.$store.state.allItems
       },
       getCode() {
-        if(this.icode) {return this.icode.trim().toLowerCase()}
+        if(this.icode) {return this.icode.toString().toLowerCase()}
         else {return null}
       },
       nameExist() {
+        // .trim().toLowerCase();
         return this.getAll.map(function(e) {
-              return e.icode.trim().toLowerCase();}).indexOf(this.getCode);
+              return e.icode.toString().toLowerCase()}).indexOf(this.getCode);
       },
       valueInserted() {
         return (

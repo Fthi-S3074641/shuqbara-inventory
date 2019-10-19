@@ -8,7 +8,7 @@
         <v-card-title class="danger headline grey lighten-1" primary-title> Modify: "{{ ecode }}"</v-card-title>
         <v-card-text>
           <br>
-          <v-text-field label="Code" clearable  v-model="newicode"></v-text-field>
+          <v-text-field label="Code" clearable  v-model.trim="newicode"></v-text-field>
           <p class="red--text" v-if="(nameExist !== -1 || isSame)"> Duplicated name. Make it unique </p>
           <v-text-field label="Brand"  clearable v-model="newibrand"></v-text-field>
           <v-text-field label="Type"  autofocus clearable v-model="newitype"></v-text-field>
@@ -67,10 +67,10 @@ export default {
       },
       nameExist() {
         return this.getAll.map(function(e) {
-              return e.icode.trim().toLowerCase();}).indexOf(this.newicode.toLowerCase());
+              return e.icode.toString().toLowerCase();}).indexOf(this.newicode.toString().toLowerCase());
       },
       isSame() {
-        return (this.newicode.trim().toLowerCase() === this.ecode.trim().toLowerCase())
+        return (this.newicode.toString().toLowerCase() === this.ecode.toString().toLowerCase())
       }
     },
     created() {

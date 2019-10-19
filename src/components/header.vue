@@ -19,7 +19,7 @@
           :to="it.link" text exact class="elevation-0"> {{ it.text}} 
           </v-btn>
 
-          <v-btn text exact :to="getLink"> Comments </v-btn>
+          <v-btn text exact :to="'/comments'"> Comments </v-btn>
         </v-toolbar-items>
       </v-app-bar>
       <!-- End of app toolbar -->

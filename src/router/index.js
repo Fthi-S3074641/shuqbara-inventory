@@ -39,7 +39,8 @@ export default new Vrouter({
         {
             path: '/comments',
             name: '/comments',
-            component: comments
+            component: comments,
+            props: true
         }
     ],
     mode: 'history'

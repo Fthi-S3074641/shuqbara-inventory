@@ -30,11 +30,15 @@
                 </h1>
             </v-flex>
       <v-flex mb-5 xs12 >
-        <h3 class="hidden-md-and-up font-weight-light">
-            Shuqbara allows Buisness owners Manage Inventory & Generate Reports using a Smartphone.
+        <h3 class=" text--center font-weight-light">
+            Manage Buisness Inventory  <br> Generate buisness Reports        <br>
+        For more than <span class="blue--text"> 10,000 </span>items
         </h3>
+        
         <div> &nbsp; </div>
         <v-btn outlined color="blue lighten-1" large @click="$router.push('/read')"> Get started  </v-btn>
+        <br>
+
       </v-flex>
     </v-card-text>
 
@@ -42,15 +46,15 @@
     <v-layout justify="center">
     <v-flex mb-5 xs12 >
         <div class="text--primary">
-            <h5 class="font-weight-light">
+            <h4 class="font-weight-light">
             <v-icon small>mdi-phone</v-icon> 
             +251953166155 &nbsp;   
             <v-icon small>mdi-email</v-icon>
-            fthialem@gmail.com &nbsp;&nbsp; &copy; {{ new Date().getFullYear() }}</h5>
-            <h5 class="font-weight-light"> 
+            fthialem@gmail.com &nbsp;&nbsp; &copy; {{ new Date().getFullYear() }}</h4>
+            <h4 class="font-weight-light"> 
             <v-icon small>mdi-web</v-icon>
             Visit our website 
-            www.shuqbara.com </h5>
+            www.shuqbara.com </h4>
         </div>
         </v-flex>
         </v-layout>
