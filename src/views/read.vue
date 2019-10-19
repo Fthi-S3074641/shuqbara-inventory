@@ -67,61 +67,19 @@
     <!-- End of Navigation -->
 
     <v-content style="padding: 0px;">
-  <v-row justify="center">
-    <v-col cols="12" sm="10" md="8" lg="6">
-        <v-card flat class="transparent elevation-0">
-
-    <v-card-text style="height: 400px;">
-      <v-list two-line class="transparent elevation-0">
-        <v-list-group v-for="(item, index) in filteredArticles" :key="index" no-action :accordion="true" :focusable="true">
-        <v-divider :key="index" :inset="true"></v-divider>
-        <template v-slot:activator>
-          <v-list-item :key="index">
-            <v-list-item-avatar :color='getColor(item.iquantity)' size="36">
-              <span class="white--text title font-weight-light">{{item.iquantity}}</span>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title class="title font-weight-light" v-html="`${item.icode}`"></v-list-item-title>
-              <v-list-item-subtitle v-html="`<span class='text--primary'>${item.ibrand}</span> &mdash; ${item.itype}.`"></v-list-item-subtitle>
-              </v-list-item-content>
-          </v-list-item>
-        </template>
-
-        <v-list-item >
-          <v-list-item-content>
-            <v-list-item-title>             
-              <v-row justify="space-around">
-                <Sell :scode="item.icode"/>
-                <Restock :rcode="item.icode"/>
-                <Edit :ecode="item.icode"/>
-                <Delete :dcode="item.icode"/>
-              </v-row>
-            </v-list-item-title>
-            <v-list-item-subtitle v-for="(subItem, index) in item.iactivity" :key="index" v-text="`${subItem.title} ${subItem.idate}`"></v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list-group>
-    </v-list>
-  </v-card-text>
-    </v-card>
-  </v-col>
-  </v-row>
-    
+      <Dashboard :finder="searchString" />
     </v-content>
       <v-footer app fixed class="transparent">
-    <div class="flex-grow-1"></div>
-      <v-btn  fab dark color="primary" @click="$router.push('/register')">
-        <v-icon > mdi-plus</v-icon>
-      </v-btn>
-  </v-footer>
+        <div class="flex-grow-1"></div>
+        <v-btn  fab dark color="primary" @click="$router.push('/register')">
+          <v-icon > mdi-plus</v-icon>
+        </v-btn>
+      </v-footer>
   </v-app>
 </template>
 
 <script>
-import Delete from './../components/dialog/delete'
-import Sell from './../components/dialog/sell'
-import Edit from './../components/dialog/edit'
-import Restock from './../components/dialog/restock'
+import Dashboard from './../components/dashboard'
 
 export default {
     data(){
@@ -134,56 +92,14 @@ export default {
                 { text: 'Report', icon: 'mdi-collapse-all', link: '/report' }
             ],
             searchString: null,
-            sold: false,
-            shuqbara: [],
         }
     },
     methods: {
         goThere(distnation){
             this.$router.push(distnation)
-        },
-      getIndex(iicode) {
-        return this.getAll.map(function(e) {
-          return e.icode;}).indexOf(iicode);
-      },
-      increasingList() {
-          this.shuqbara.sort((a, b) => a.iquantity - b.iquantity);
-        },
-      descendingList() {
-          this.shuqbara.sort((a, b) => b.iquantity - a.iquantity);
-        },
-        getColor(qun) {
-                    if(parseInt(qun) > 2) {return 'primary lighten-2'}
-          else {return 'red lighten-2'}
         }
   },
     computed: {
-      getCodeList(){
-        return this.getAll.map(fruit => fruit.icode)
-        },
-      getAll() {
-        // console.log(this.$store.state.allItems)
-        return this.$store.state.allItems
-      },        
-      
-      filteredArticles: function () {
-            var articles_array = this.shuqbara,
-                searchString = this.searchString;
-
-            if(!searchString){
-                return articles_array;
-            }
-
-            searchString = searchString.trim().toLowerCase();
-
-            articles_array = articles_array.filter(function(item){
-                if(item.icode.toLowerCase().indexOf(searchString) !== -1){
-                    return item;
-                }
-            })
-            // Return an array with the filtered data.
-            return articles_array
-        },
         getLink() {
             if(this.$store.state.fullName !== null && this.$store.state.phoneNumber !== null){
                 return '/comments'
@@ -199,18 +115,7 @@ export default {
       }
     },
     components: {
-      Delete,
-      Sell,
-      Edit,
-      Restock
-    },
-    created() {
-      this.shuqbara = this.$store.state.allItems
-    },
-    mounted() {
-        const shuqName = JSON.parse(window.localStorage.getItem('shuqName'))
-        const shuqPhone = JSON.parse(window.localStorage.getItem('shuqPhone'))
-        this.$store.dispatch('setUser', {fullName: shuqName, phoneNumber: shuqPhone})
+      Dashboard
     }
 }
 </script>

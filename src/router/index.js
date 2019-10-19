@@ -28,7 +28,8 @@ export default new Vrouter({
         {
             path: '/read',
             name: '/read',
-            component: read
+            component: read,
+            props: true
         },
         {
             path: '/report',

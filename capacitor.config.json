@@ -1,6 +1,6 @@
 {
-  "appId": "com.rcube.app",
-  "appName": "rcube",
+  "appId": "com.ftalem.shuqbara",
+  "appName": "Shuqbara",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "dist"

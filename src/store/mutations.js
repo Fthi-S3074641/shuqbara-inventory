@@ -5,6 +5,30 @@ export const mutations = {
     state.allItems.push(payload)
   },
 
+  [types.UPDATE_ITEM] (state, payload) {
+    Object.assign(state.allItems[payload.index], { 
+      icode: payload.icode,
+      ibrand: payload.ibrand,
+      itype: payload.itype,
+      istate: payload.istate,
+      iwhen: payload.iwhen
+    });
+  },
+
+  [types.MORE_ITEM] (state, payload) {
+    Object.assign(state.allItems[payload.index], { 
+      iquantity: payload.iquantity,
+      iactivity: payload.iactivity
+    });
+  },
+
+  [types.LESS_ITEM] (state, payload) {
+    Object.assign(state.allItems[payload.index], { 
+      iquantity: payload.iquantity,
+      iactivity: payload.iactivity
+    });
+  },
+
   [types.REMOVE_ITEM] (state, payload) {
     state.allItems.splice(payload,1)
   },
