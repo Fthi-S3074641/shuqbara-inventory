@@ -50,7 +50,7 @@
              <v-list-item-title >{{item.text}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item :to="getLink">
+        <v-list-item :to="'/comments'">
           <v-list-item-icon>
             <v-icon color="red" v-text="'mdi-heart'"> </v-icon>
               <v-list-item-content>
@@ -95,20 +95,7 @@ export default {
             this.$router.push(distnation)
         }
   },
-    computed: {
-        getLink() {
-            if(this.$store.state.fullName !== null && this.$store.state.phoneNumber !== null){
-                return '/comments'
-            }
-            else {
-                return '/getcomment'
-            }
-        },
-        getTitle() {
-            return this.$store.state.title
-        }
-    },
-    mounted() {
+  mounted() {
         const shuqName = JSON.parse(window.localStorage.getItem('shuqName'))
         const shuqPhone = JSON.parse(window.localStorage.getItem('shuqPhone'))
         this.$store.dispatch('setUser', {fullName: shuqName, phoneNumber: shuqPhone})

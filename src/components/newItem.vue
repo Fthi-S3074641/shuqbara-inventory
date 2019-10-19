@@ -16,9 +16,9 @@
             <v-row align="center" justify="center" >
                 <v-btn text @click="$router.go(-1)">Exit</v-btn>
                   <div class="flex-grow-1"></div>
-                <v-btn text color="primary" :disabled="icode == null || (nameExist !== -1)" @click="e6 = 2">Continue</v-btn>
+                <v-btn text color="primary" :disabled="icode == null || (nameExist !== -1)" @click="e6 = 2" style="margin-right: 15px; margin-bottom: 5px;" outlined>Continue</v-btn>
             </v-row>
-            <v-text-field v-on:keyup.enter="e6 = 2" outlined placeholder="ID" clearable  required ref="icode" v-model="icode" :rules="[() => !!icode || 'This field is required']" ></v-text-field>
+            <v-text-field autofocus v-on:keyup.enter="e6 = 2" outlined placeholder="ID" clearable  required ref="icode" v-model="icode" :rules="[() => !!icode || 'This field is required']" ></v-text-field>
              <p class="red--text" v-if="(nameExist !== -1)"> Duplicated name. Make it unique </p>
         </v-stepper-content>
 
@@ -28,9 +28,9 @@
             <v-row align="center" justify="center" >
                 <v-btn icon @click="e6 = 1" style="margin-left: 15px;"> <v-icon> mdi-arrow-up </v-icon></v-btn>
                 <div class="flex-grow-1"></div>
-                <v-btn text color="primary" :disabled="ibrand == null" @click="e6 = 3">Continue</v-btn>
+                <v-btn text color="primary" :disabled="ibrand == null" @click="e6 = 3" style="margin-right: 15px; margin-bottom: 5px;" outlined>Continue</v-btn>
             </v-row>
-              <v-text-field v-on:keyup.enter="e6 = 3" outlined placeholder="Brand" clearable  required ref="ibrand" v-model="ibrand" :rules="[() => !!ibrand || 'This field is required']"></v-text-field>
+              <v-text-field focus v-on:keyup.enter="e6 = 3" outlined placeholder="Brand" clearable  required ref="ibrand" v-model="ibrand" :rules="[() => !!ibrand || 'This field is required']"></v-text-field>
         </v-stepper-content>
 
         <v-stepper-step :complete="e6 > 3" step="3">Group
@@ -40,9 +40,9 @@
               <v-row align="center" justify="center" >
                 <v-btn icon @click="e6 = 2" style="margin-left: 15px;"> <v-icon> mdi-arrow-up </v-icon></v-btn>
                 <div class="flex-grow-1"></div>
-                <v-btn text color="primary" :disabled="itype == null" @click="e6 = 4">Continue</v-btn>
+                <v-btn text color="primary" :disabled="itype == null" @click="e6 = 4" style="margin-right: 15px; margin-bottom: 5px;" outlined>Continue</v-btn>
             </v-row>
-              <v-text-field v-on:keyup.enter="e6 = 4" outlined placeholder="Type" clearable required ref="itype" v-model="itype" :rules="[() => !!itype || 'This field is required']"></v-text-field>
+              <v-text-field focus v-on:keyup.enter="e6 = 4" outlined placeholder="Type" clearable required ref="itype" v-model="itype" :rules="[() => !!itype || 'This field is required']"></v-text-field>
         </v-stepper-content>
 
         <v-stepper-step step="4">
@@ -53,9 +53,9 @@
               <v-row align="center" justify="center" >
                 <v-btn text @click="$router.go(-1)">Exit</v-btn>
                 <div class="flex-grow-1"></div>
-                <v-btn class="primary" :disabled="(nameExist !== -1)" v-if="valueInserted" @click="submit" >Register</v-btn>
+                <v-btn style="margin-right: 15px; margin-bottom: 5px;" outlined class="primary white--text" :disabled="!valueInserted" @click="submit" >Register</v-btn>
             </v-row>
-              <v-text-field v-on:keyup.enter="submit" min="0" outlined placeholder="Number" clearable required ref="iquantity" v-model="iquantity" type="number" :rules="[() => !!iquantity || 'Must be greater than 1']"></v-text-field>
+              <v-text-field focus v-on:keyup.enter="submit" min="0" outlined placeholder="Number" clearable required ref="iquantity" v-model="iquantity" type="number" :rules="[() => !!iquantity || 'Must be greater than 1']"></v-text-field>
           </v-stepper-content>
         </v-stepper>
         </v-card-text>

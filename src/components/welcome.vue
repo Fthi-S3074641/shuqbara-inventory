@@ -1,5 +1,5 @@
 <template>
- <v-row justify="center" style="margin-top: 30px;">
+ <v-row justify="center" style="margin-top: 10px;">
         <v-col cols="12" sm="10" md="8" lg="6">
   <v-container>
     <v-layout
@@ -42,19 +42,15 @@
     <v-layout justify="center">
     <v-flex mb-5 xs12 >
         <div class="text--primary">
-            <h6 class="font-weight-light">
+            <h5 class="font-weight-light">
             <v-icon small>mdi-phone</v-icon> 
             +251953166155 &nbsp;   
             <v-icon small>mdi-email</v-icon>
-            fthialem@gmail.com &nbsp;&nbsp; &copy; {{ new Date().getFullYear() }}</h6>
-            <h6 class="font-weight-light"> 
-            <v-icon small>mdi-map-marker</v-icon>
-            Axum, Tigray, Ethiopia:: 
-            Near Ezana Park @Teklish Dish </h6>
-            <h6 class="font-weight-light"> 
+            fthialem@gmail.com &nbsp;&nbsp; &copy; {{ new Date().getFullYear() }}</h5>
+            <h5 class="font-weight-light"> 
             <v-icon small>mdi-web</v-icon>
             Visit our website 
-            www.shuqbara.com </h6>
+            www.shuqbara.com </h5>
         </div>
         </v-flex>
         </v-layout>

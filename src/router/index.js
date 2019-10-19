@@ -5,7 +5,6 @@ import welcome from './../views/welcome'
 import register from './../views/register'
 import read from './../views/read'
 import report from './../views/report'
-import getcomment from './../views/getcomment'
 import comments from './../views/comments'
 
 Vue.use(Vrouter)
@@ -34,12 +33,8 @@ export default new Vrouter({
         {
             path: '/report',
             name: '/report',
-            component: report
-        },
-        {
-            path: '/getcomment',
-            name: '/getcomment',
-            component: getcomment
+            component: report,
+            props: true
         },
         {
             path: '/comments',

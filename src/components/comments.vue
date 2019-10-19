@@ -19,9 +19,9 @@
                     </span>
                     <div :inset="true">
                 <span class="font-weight-light flex-grow-1">{{ feed.iwhen}} 
-                <v-btn class="flex-grow-1" icon @click="fDelete(feed)" v-if="feed.phoneNumber === getPhone">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<v-icon color="red lighten-2" >mdi-delete</v-icon>
-                </v-btn>
+                <!-- <v-btn class="flex-grow-1" icon @click="fDelete(feed)" v-if="feed.phoneNumber === getPhone"> -->
+                  <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<v-icon color="red lighten-2" >mdi-delete</v-icon> -->
+                <!-- </v-btn> -->
                 </span>
                 </div>
                 </v-card-text>
@@ -50,17 +50,17 @@ export default {
       }
   },
   methods: {
-      fDelete(feed) {
-          if(this.$store.state.phoneNumber === feed.phoneNumber){
-            this.$firestore.feedbacks.doc(feed['.key']).delete()
-            this.$router.push('/comments');
-          }
-      }
+      // fDelete(feed) {
+      //     if(this.$store.state.phoneNumber === feed.phoneNumber){
+      //       this.$firestore.feedbacks.doc(feed['.key']).delete()
+      //       this.$router.push('/comments');
+      //     }
+      // }
   },
   computed: {
-      getPhone() {
-          return this.$store.state.phoneNumber
-      }
+      // getPhone() {
+      //     return this.$store.state.phoneNumber
+      // }
   }
 }
 </script>
