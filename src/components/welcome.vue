@@ -46,16 +46,16 @@
     <v-layout justify="center">
     <v-flex mb-5 xs12 >
         <div class="text--primary">
-            <h4 class="font-weight-light">
-            <v-icon small>mdi-phone</v-icon> 
-            +251953166155   
-            <!-- <v-icon small>mdi-email</v-icon> -->
-            fthialem@gmail.com</h4>
             <h4 class="font-weight-light"> 
-            <v-icon small>mdi-web</v-icon>
-            Visit our website 
-            www.shuqbara.com </h4>
+            <v-icon>mdi-web</v-icon>
+              www.shuqbara.com </h4>
+            <h4 class="font-weight-light">
+            <!-- <v-icon small>mdi-email</v-icon> -->
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fthialem@gmail.com </h4>
+            <h4 class="font-weight-light">
+            +251953166155 </h4>
             <h4 class="font-weight-light"> &nbsp;&nbsp; &copy; {{ new Date().getFullYear() }} </h4>
+            <!-- <h4> {{wholeResponse}} </h4> -->
         </div>
         </v-flex>
         </v-layout>
@@ -71,11 +71,14 @@
 </template>
 
 <script>
+// import axios from 'axios';
+
 export default {
   data() {
     return {
         inumber: null,
-        started: false
+        started: false,
+        wholeResponse: null
     }
   },
   methods: {
@@ -84,6 +87,17 @@ export default {
             this.$router.push('/read')
         }
     }
+  },
+  created() {
+  //   axios
+  //   .get('http://127.0.0.1:5000/ping')
+  //   .then(response => {
+  //     this.wholeResponse = response.data
+  //     console.log(response)
+  //   })
+  //   .catch(error => {
+  //     console.log(error)
+  //   })
   }
 };
 </script>
