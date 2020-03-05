@@ -59,7 +59,7 @@ export default {
   },
   created() {
     if(this.$store.state.fullName === null || this.$store.state.phoneNumber === null){
-      this.$router.push('/getcomment')
+      this.$router.push('/comments')
     }
   }
 }
